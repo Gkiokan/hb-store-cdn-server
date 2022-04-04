@@ -1,20 +1,22 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-black">
-      <q-toolbar>
+<q-layout view="lHh Lpr lFf">
+    <q-header class="q-pa-sm bg-transparent">
+        <q-toolbar flat class="bg-dark text-white rounded-borders">
+            <q-btn flat label="PKG-Zone" />
+            <q-space />
 
-        <q-toolbar-title class="text-subtitle1">
-          HB-Store Local CDN Server
-        </q-toolbar-title>
-
-        <div>v{{ $q.version }}</div>
-      </q-toolbar>
+            <q-tabs v-model="$root.tab" shrink stretch>
+              <q-tab name="config" label="Config" />
+              <q-tab name="files" label="Files" />
+              <q-tab name="logs" label="Logs" />
+            </q-tabs>
+        </q-toolbar>
     </q-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
-  </q-layout>
+</q-layout>
 </template>
 
 <script>

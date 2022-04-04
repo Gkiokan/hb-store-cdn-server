@@ -2,7 +2,7 @@
   "name": "hb-store-cdn-server",
   "version": "0.0.1",
   "description": "HB-Store CDN Server",
-  "productName": "hb-store-cdn-server",
+  "productName": "HB-Store CDN Server",
   "author": "Gkiokan <support@gkiokan.net>",
   "private": true,
   "scripts": {
