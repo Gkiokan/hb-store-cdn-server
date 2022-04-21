@@ -1,3 +1,4 @@
+// "vuex-pathify": "^1.5.1"
 import pathify from 'vuex-pathify'
 export default pathify
 

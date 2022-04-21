@@ -14,6 +14,7 @@ const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
   return {
+    target: 'electron-renderer',
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: false,
 
@@ -72,7 +73,10 @@ module.exports = configure(function (ctx) {
       // https://v2.quasar.dev/quasar-cli-webpack/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
 
-      chainWebpack (/* chain */) {},
+      chainWebpack (chain){
+          const nodePolyfillWebpackPlugin = require('node-polyfill-webpack-plugin')
+          chain.plugin('node-polyfill').use(nodePolyfillWebpackPlugin)
+      },
 
       extendWebpack (cfg) {
           cfg.resolve.alias = {
@@ -205,7 +209,8 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/configuring-electron
     electron: {
-      bundler: 'packager', // 'packager' or 'builder'
+      target: 'electron-renderer',
+      bundler: 'builder', // 'packager' or 'builder'
 
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options

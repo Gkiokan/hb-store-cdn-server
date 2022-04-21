@@ -2,6 +2,11 @@ import { app, BrowserWindow, nativeTheme } from 'electron'
 import path from 'path'
 import os from 'os'
 
+// Initialise
+console.log("Application loading...")
+import './ipcMain'
+
+
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()
 
@@ -24,9 +29,13 @@ function createWindow () {
     height: 600,
     useContentSize: true,
     webPreferences: {
-      contextIsolation: true,
-      // More info: /quasar-cli/developing-electron-apps/electron-preload-script
-      preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD)
+        nodeIntegration: true,
+        contextIsolation: true,
+        enableRemoteModule: true,
+        // More info: /quasar-cli/developing-electron-apps/electron-preload-script
+        preload: path.resolve(__dirname, process.env.QUASAR_ELECTRON_PRELOAD),
+        allowRunningInsecureContent: false,
+        sandbox: false,
     }
   })
 

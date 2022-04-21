@@ -4,6 +4,7 @@ export const state = {
     state: null,
     ip: null,
     port: null,
+    basePath: null,
 }
 
 

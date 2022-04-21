@@ -27,15 +27,14 @@ import pathify from './pathify'
      return { ...modules, [name]: module }
 }, {})
 
-export default store(function (/* { ssrContext } */) {
-  const Store = createStore({
-    plugins: [ pathify.plugin ],
-    modules,
 
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    // strict: process.env.DEBUGGING
-  })
+const Store = createStore({
+  plugins: [ pathify.plugin ],
+  modules,
 
-  return Store
+  // enable strict mode (adds overhead!)
+  // for dev mode and --debug builds only
+  // strict: process.env.DEBUGGING
 })
+
+export default Store
