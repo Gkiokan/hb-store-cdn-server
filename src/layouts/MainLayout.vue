@@ -2,7 +2,7 @@
 <q-layout view="lHh Lpr lFf">
     <q-header class="q-pa-sm bg-transparent">
         <q-toolbar flat class="bg-dark text-white rounded-borders">
-            <q-btn flat label="PKG-Zone" />
+            <q-btn flat label="PKG-Zone" v-if="1" />
             <q-space />
 
             <q-tabs v-model="$root.tab" shrink stretch>
