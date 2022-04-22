@@ -10,7 +10,8 @@
 
 
     <div v-for="file in files">
-        {{ getFileName(file) }}
+        <!-- {{ getFileName(file) }} -->
+        <pre>{{ file }}</pre>
     </div>
 
 </div>

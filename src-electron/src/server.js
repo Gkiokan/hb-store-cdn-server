@@ -3,6 +3,7 @@ import { app, BrowserWindow } from 'electron'
 import express from 'express'
 import http from 'http'
 import fg from 'fast-glob'
+import pkgInfo from 'ps4-pkg-info'
 
 export default {
     ip: null,
@@ -88,8 +89,25 @@ export default {
 
     addFilesFromBasePath(){
         this.log("Search for pkg files in basePath at " + this.basePath)
-        this.files = fg.sync([this.basePath + '/**/*.pkg'])
-        this.log("Found " + this.files.length + " files in basePath")
+        let files = fg.sync([this.basePath + '/**/*.pkg'])
+        this.log("Found " + files.length + " files in basePath")
+
+        let patchedFiles = []
+        files.map( async (file) => {
+            try {
+                let data = await pkgInfo.extract(file)
+                patchedFiles.push(data)
+                console.log("mapping file " + file)
+            }
+            catch(e){
+                console.log(e)
+            }
+        })
+
+        this.files = patchedFiles
+
+        console.log(this.files[0])
+
         this.sendFiles()
     },
 

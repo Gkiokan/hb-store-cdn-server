@@ -19,6 +19,7 @@
     "node-polyfill-webpack-plugin": "^1.1.4",
     "os": "^0.1.2",
     "path": "^0.12.7",
+    "ps4-pkg-info": "^1.0.1",
     "quasar": "^2.6.0",
     "semver": "^7.3.7",
     "vue": "^3.0.0",
