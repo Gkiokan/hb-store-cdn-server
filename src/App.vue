@@ -28,6 +28,7 @@ export default defineComponent({
         addEventListener(){
             window.ipc.on('error', (_, msg) => this.showError(msg))
             window.ipc.on('log', (_, log) => this.addLogs(log))
+            window.ipc.on('notify', (_, msg) => this.notify(msg))
         },
 
         showError(message){
@@ -39,12 +40,24 @@ export default defineComponent({
             })
         },
 
+        notify(message){
+            console.log("Notify", message)
+            this.$q.notify({
+                message,
+                icon: 'done',
+                color: 'green'
+            })
+        },
+
         addLogs(message){
             console.log(message)
             this.logs.unshift({ time: Date.now(), message })
         },
 
         startServer(){
+            if(!this.server.ip){
+                return this.showError("Please select your Local IP first")
+            }
             window.server.start(JSON.stringify(this.server))
         },
 

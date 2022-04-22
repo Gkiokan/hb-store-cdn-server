@@ -31,6 +31,12 @@ export default {
         console.log("Server:: " + msg)
     },
 
+    notify(msg){
+        const win = BrowserWindow.getFocusedWindow();
+        win.webContents.send('notify', msg)
+        this.log(msg)
+    },
+
     addCORSHandler(){
         this.host.app.use((req, res, next) => {
             res.setHeader('Access-Control-Allow-Origin', '*')
@@ -76,7 +82,7 @@ export default {
         }
 
         this.host.server = await this.host.app.listen(this.port, () => {
-            this.log('Server is running on ' + this.ip + ' at port ' + this.port)
+            this.notify('Server is running on ' + this.ip + ' at port ' + this.port)
             this.addCORSHandler()
             this.addRouterMiddleware()
             this.createPaths()
