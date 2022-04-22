@@ -5,6 +5,7 @@ export const state = {
     ip: null,
     port: null,
     basePath: null,
+    binaryVersion: "0.00",
 }
 
 

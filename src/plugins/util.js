@@ -28,6 +28,4 @@ let util = {
     },
 }
 
-export default ({ app }) => {
-    app.config.globalProperties.$util = util
-}
+export default util

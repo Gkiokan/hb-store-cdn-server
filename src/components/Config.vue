@@ -30,11 +30,22 @@
         <q-btn outline color="red-8" label="Stop" />
     </div>
 
-    <q-separator class="q-my-md" v-if="false" />
+    <q-separator class="q-my-md" v-if="true" />
+
+    <div class='row'>
+        <div class='col'>
+            <q-btn outline no-caps color="cyan" label="Check Server Binaries" @click="checkServerBinaries" />
+        </div>
+        <div class='' v-if="updateAvailable">
+            <q-btn size="md" class="q-mx-sm" icon="download" />
+        </div>
+        <div class='self-center text-right'>
+            Current Version {{ binaryVersion }}
+        </div>
+    </div>
 
     <pre>{{ ip }}:{{ port }}</pre>
     <pre>{{ basePath }}</pre>
-
     <pre>{{ interfaces }}</pre>
 
 </div>
@@ -50,12 +61,14 @@ export default {
 
     data(){ return {
         interfaces: [],
+        updateAvailable: false,
     }},
 
     computed: {
         ip: sync('server/ip', false),
         port: sync('server/port', false),
         basePath: sync('server/basePath', false),
+        binaryVersion: get('server/binaryVersion', false),
     },
 
     mounted(){
@@ -81,6 +94,32 @@ export default {
         async loadInterfaces(){
             this.interfaces = await window.hb.getNetWorkInterfaces()
         },
+
+
+        async checkServerBinaries(){
+            let release = await this.$hb.getRelease()
+            let version = this.$hb.getVersion(release)
+            let assets  = this.$hb.getAssets(release)
+            let name    = this.$hb.getName(release)
+
+            console.log({ version, assets, name })
+
+            let compare = this.$hb.checkVersion(version)
+
+            if(compare == 1)
+              this.$q.notify("Your current Binary are higher then the release")
+
+            if(compare == 0)
+              this.$q.notify("You are on the current binary version")
+
+            if(compare == -1){
+              this.updateAvailable = true
+              this.$q.notify("New Server Binaries are available. Please update")
+            }
+
+
+        },
+
     }
 }
 </script>
