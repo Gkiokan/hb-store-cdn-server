@@ -93,20 +93,23 @@ export default {
         this.log("Found " + files.length + " files in basePath")
 
         let patchedFiles = []
-        files.map( async (file) => {
-            try {
-                let data = await pkgInfo.extract(file)
-                patchedFiles.push(data)
-                console.log("mapping file " + file)
-            }
-            catch(e){
-                console.log(e)
-            }
+        console.log(files)
+
+        files.forEach( (file) => {
+
+              pkgInfo.extract(file)
+                  .then( data => {
+                      console.log("mapping file " + file)
+                      console.log(data)
+                      // patchedFiles.push(data)
+                      this.files.push(data)
+                  })
+                  .catch( e => console.log(e) )
         })
 
-        this.files = patchedFiles
-
-        console.log(this.files[0])
+        console.log("=====================================")
+        console.log("patched file 0 ", this.files[0] )
+        console.log("=====================================")
 
         this.sendFiles()
     },

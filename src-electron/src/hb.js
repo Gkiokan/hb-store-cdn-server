@@ -8,21 +8,21 @@ export default {
     createItem(file){
 
         let item = {
-          "id": "BBFF12362",
-          "name": "Kill'em All.",
-          "desc": "Title says it all",
-          "image": "http://api.staging.pkg-zone.com/attachments/storedata/killemall_icon0.png",
+          "id": "__cusa",
+          "name": "__name",
+          "desc": "__desc",
+          "image": "__image",
           "package": "http://api.staging.pkg-zone.com/detail/BBFF12362",
           "version": "1.00",
-          "picpath": "/user/app/NPXS39041/storedata/killemall_icon0.png",
+          "picpath": "/user/app/NPXS39041/storedata/hb_store_cdn_sample.png",
           "desc_1": "",
           "desc_2": "",
           "ReviewStars": "0/5 Rating",
-          "Size": "0 bytes",
+          "Size": "n/a",
           "Author": "HB-Store CDN",
           "apptype": "HB Game",
           "pv": "5.05+",
-          "main_icon_path": "http://api.staging.pkg-zone.com/attachments/storedata/killemall_icon0.png",
+          "main_icon_path": "__image",
           "main_menu_pic": "/user/app/NPXS39041/storedata/killemall_icon0.png",
           "releaseddate": "2019-04-30"
         }
