@@ -22,6 +22,7 @@ export default defineComponent({
         logs: sync('app/logs', false),
         server: get('server', false),
         state: sync('server/state', false),
+        files: sync('server/files', false),
         app: get('app', false),
     },
 
@@ -32,10 +33,15 @@ export default defineComponent({
             window.ipc.on('notify', (_, msg) => this.notify(msg))
 
             window.ipc.on('server-state', this.updateServerState)
+            window.ipc.on('server-files', this.updateServerFiles)
         },
 
         updateServerState(_, state){
             this.state = state
+        },
+
+        updateServerFiles(_, files){
+            this.files = files
         },
 
         showError(message){

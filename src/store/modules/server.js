@@ -6,6 +6,7 @@ export const state = {
     port: "6448",
     basePath: null,
     binaryVersion: "0.00",
+    files: [],
     assets: [],
 }
 

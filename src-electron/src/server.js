@@ -2,11 +2,13 @@ import { app, BrowserWindow } from 'electron'
 
 import express from 'express'
 import http from 'http'
+import fg from 'fast-glob'
 
 export default {
     ip: null,
     port: null,
     basePath: null,
+    files: [],
     host: {
         app: null,
         server: null,
@@ -37,6 +39,11 @@ export default {
         this.log(msg)
     },
 
+    sendFiles(){
+        const win = BrowserWindow.getFocusedWindow();
+        win.webContents.send('server-files', this.files)
+    },
+
     setState(state=null){
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('server-state', state)
@@ -60,10 +67,30 @@ export default {
     },
 
     createPaths(){
-        this.host.router = new express.Router()
-        // this.addHearthbeatEndpoint()
-        // this.addFilesFromBasePath()
         this.log("Server is ready to create paths")
+        this.host.router = new express.Router()
+        this.addHearthbeatEndpoint()
+        this.addFilesFromBasePath()
+    },
+
+    addHearthbeatEndpoint(){
+        this.log("Create Hearthbeat endpoint")
+        this.host.router.get('/hb', function(request, response){
+            response.status(200).json({
+                remoteAddress: request.connection.remoteAddress,
+                remotePort: request.connection.remotePort,
+                localAddress: request.connection.localAddress,
+                localPort: request.connection.localPort,
+                message: "Hearthbeat of HB-Store CDN Server is working"
+            })
+        })
+    },
+
+    addFilesFromBasePath(){
+        this.log("Search for pkg files in basePath at " + this.basePath)
+        this.files = fg.sync([this.basePath + '/**/*.pkg'])
+        this.log("Found " + this.files.length + " files in basePath")
+        this.sendFiles()
     },
 
     createServer(){
