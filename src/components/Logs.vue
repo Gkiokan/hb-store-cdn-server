@@ -1,10 +1,10 @@
 <template lang="html">
 <div class='logs'>
 
-    <div class="text-h4">Logs</div>
+    <div class="text-h4" v-if="false">Logs</div>
     <div style="height: 15px" />
 
-    Logs
+    Logs, latest on top
 
 </div>
 </template>

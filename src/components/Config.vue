@@ -1,7 +1,7 @@
 <template lang="html">
 <div class='config'>
 
-    <div class="text-h4">Config</div>
+    <div class="text-h4" v-if="false">Config</div>
     <div style="height: 15px" />
 
     <div class='q-gutter-y-md q-mb-md'>
@@ -23,6 +23,8 @@
         </slot>
       </q-input>
     </div>
+
+    <q-separator class="q-my-md" v-if="true" />
 
     <div class='q-gutter-md'>
         <q-btn outline color="green-8" label="Start" />

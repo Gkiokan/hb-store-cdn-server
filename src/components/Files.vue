@@ -1,7 +1,7 @@
 <template lang="html">
 <div class='files'>
 
-    <div class="text-h4">Files</div>
+    <div class="text-h4" v-if="false">Files</div>
     <div style="height: 15px" />
 
     List of local serving files will be here ...
