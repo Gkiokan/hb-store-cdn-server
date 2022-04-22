@@ -22,4 +22,5 @@ import { ipcRenderer } from 'electron'
 contextBridge.exposeInMainWorld('hb', {
     openBasePathDialog: () => ipcRenderer.invoke('open-dir'),
     getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
+    downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),
 })

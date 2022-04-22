@@ -1,11 +1,12 @@
 import { app, BrowserWindow, nativeTheme } from 'electron'
 import path from 'path'
 import os from 'os'
+import electronDl from 'electron-dl'
 
 // Initialise
-console.log("Application loading...")
 import './ipcMain'
 
+electronDl()
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()

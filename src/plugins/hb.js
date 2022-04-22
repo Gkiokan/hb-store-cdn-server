@@ -29,7 +29,14 @@ const hb = {
 
     getAssets(release=null){
         if(!release) return "NO_RELEASE_OBJECT"
-        return release.assets
+        let assets = release.assets
+        let urls = []
+
+        assets.map( f => {
+            urls.push(f.browser_download_url)
+        })
+
+        return urls
     },
 
     checkVersion(version=null){

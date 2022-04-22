@@ -37,7 +37,7 @@
             <q-btn outline no-caps color="cyan" label="Check Server Binaries" @click="checkServerBinaries" />
         </div>
         <div class='' v-if="updateAvailable">
-            <q-btn size="md" class="q-mx-sm" icon="download" />
+            <q-btn size="md" class="q-mx-sm" icon="download" @click="downloadServerBinaries" />
         </div>
         <div class='self-center text-right'>
             Current Version {{ binaryVersion }}
@@ -61,6 +61,7 @@ export default {
 
     data(){ return {
         interfaces: [],
+        assets: [],
         updateAvailable: false,
     }},
 
@@ -111,8 +112,13 @@ export default {
 
             if(compare == -1){
               this.updateAvailable = true
+              this.assets = assets
               this.$q.notify("New Server Binaries are available. Please update")
             }
+        },
+
+        downloadServerBinaries(){
+            this.assets.map( f => window.hb.downloadServerBinaries(f) )
         },
 
     }
