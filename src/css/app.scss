@@ -1,1 +1,18 @@
 // app global css in SCSS form
+html, body {
+    /* Foreground, Background */
+    scrollbar-color: #999 #333;
+
+    ::-webkit-scrollbar {
+        width: 10px; /* Mostly for vertical scrollbars */
+        height: 5px; /* Mostly for horizontal scrollbars */
+    }
+
+    ::-webkit-scrollbar-thumb { /* Foreground */
+        background: #2a2a2a;
+    }
+    ::-webkit-scrollbar-track { /* Background */
+        background: #1a1a1a;
+    }
+
+}

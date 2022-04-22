@@ -34,10 +34,6 @@
 
     <ServerBinaryDownload />
 
-    <pre>{{ ip }}:{{ port }}</pre>
-    <pre>{{ basePath }}</pre>
-    <pre>{{ interfaces }}</pre>
-
 </div>
 </template>
 
@@ -51,7 +47,7 @@ export default {
     name: 'Config',
 
     data(){ return {
-        interfaces: [],        
+        interfaces: [],
     }},
 
     computed: {

@@ -2,8 +2,8 @@ import { make } from 'vuex-pathify'
 
 export const state = {
     state: null,
-    ip: null,
-    port: null,
+    ip: "127.0.0.1",
+    port: "6448",
     basePath: null,
     binaryVersion: "0.00",
     assets: [],
