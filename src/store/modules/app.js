@@ -5,6 +5,7 @@ export const state = {
     selected: null,
     serverFilesVersion: false,
     pkgs: [],
+    logs: [],
 }
 
 

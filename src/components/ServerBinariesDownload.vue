@@ -96,6 +96,7 @@ export default {
               this.updateAvailable = true
               this.newUpdateAvailableVersion = version
               this.assets = assets
+              this.$root.addLogs("New Server Binaries are available. Update in progress")
               this.$q.notify({
                   message: "New Server Binaries are available. Update in progress",
                   timeout: 200,
@@ -113,6 +114,7 @@ export default {
             this.updateAvailable = true
             this.newUpdateAvailableVersion = this.$hb.getVersion(release)
 
+            this.$root.addLogs("Force re-update Server Binaries to version " + this.newUpdateAvailableVersion)
             this.downloadServerBinaries()
         },
 
@@ -137,6 +139,8 @@ export default {
             this.run           = false
             this.updateDone    = true
             this.binaryVersion = this.newUpdateAvailableVersion
+
+            this.$root.addLogs("Server Binaries has been updated to version " + this.newUpdateAvailableVersion)
 
             if(false)
             this.$q.notify({

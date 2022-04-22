@@ -72,7 +72,7 @@ export default {
             if(path && path.filePaths.length){
               let newBasePath = path.filePaths[0]
               this.$store.set('server/basePath', newBasePath)
-              console.log(newBasePath + ' has been selected as basePath')
+              this.$root.addLogs(newBasePath + ' has been selected as basePath')
             }
         },
 

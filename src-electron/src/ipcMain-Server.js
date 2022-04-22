@@ -4,7 +4,7 @@ import http from 'http'
 import server from './server'
 
 ipcMain.handle('server-start', async(event, server) => {
-
+    server.start(server)
 })
 
 ipcMain.handle('server-restart', async(event, server) => {
