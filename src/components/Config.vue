@@ -77,9 +77,6 @@ export default {
 
     methods: {
         async openBasePathDialog(){
-            // deprecated since v9
-            // let path = remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
-
             const path = await window.hb.openBasePathDialog()
             console.log("open base path dialog await fe", path)
 
@@ -116,8 +113,6 @@ export default {
               this.updateAvailable = true
               this.$q.notify("New Server Binaries are available. Please update")
             }
-
-
         },
 
     }
