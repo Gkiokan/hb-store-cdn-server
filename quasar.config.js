@@ -212,7 +212,6 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/configuring-electron
     electron: {
-      target: 'electron-renderer',
       bundler: 'builder', // 'packager' or 'builder'
 
       packager: {

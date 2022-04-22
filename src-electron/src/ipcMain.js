@@ -1,8 +1,6 @@
 import { BrowserWindow, app, ipcMain, dialog } from 'electron'
 import { download } from 'electron-dl'
 
-console.log("Register ipcMain Handler")
-
 ipcMain.handle('open-dir', async (event, path) => {
     return dialog.showOpenDialog({ properties: ['openDirectory'] })
 })
@@ -32,16 +30,4 @@ ipcMain.handle('getNetWorkInterfaces', async (event) => {
       });
     });
     return ifaces;
-})
-
-ipcMain.handle('download-server-binaries', async(event, file) => {
-    console.log("Server assets to download", file)
-
-    const win = BrowserWindow.getFocusedWindow();
-    const path = app.getPath('userData') + '/bin'
-
-    console.log("Server Binary Folder", path)
-
-    console.log("Download file", file)
-    // console.log(await download(win, url));
 })

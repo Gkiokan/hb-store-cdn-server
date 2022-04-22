@@ -4,9 +4,14 @@ import os from 'os'
 import electronDl from 'electron-dl'
 
 // Initialise
-import './ipcMain'
+import './src/ipcMain'
+import './src/ipcMain-ServerBinaryDownload'
 
-electronDl()
+// Initialise config
+electronDl({
+    directory: app.getPath('userData') + '/bin',
+    overwrite: true,
+})
 
 // needed in case process is undefined under Linux
 const platform = process.platform || os.platform()

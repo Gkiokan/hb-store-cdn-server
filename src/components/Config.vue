@@ -69,7 +69,7 @@ export default {
         ip: sync('server/ip', false),
         port: sync('server/port', false),
         basePath: sync('server/basePath', false),
-        binaryVersion: get('server/binaryVersion', false),
+        binaryVersion: sync('server/binaryVersion', false),
     },
 
     mounted(){
@@ -113,6 +113,7 @@ export default {
             if(compare == -1){
               this.updateAvailable = true
               this.assets = assets
+              this.binaryVersion = version
               this.$q.notify("New Server Binaries are available. Please update")
             }
         },
