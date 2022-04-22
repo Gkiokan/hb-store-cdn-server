@@ -4,7 +4,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { sync } from 'vuex-pathify'
+import { get, sync } from 'vuex-pathify'
 
 export default defineComponent({
     name: 'App',
@@ -20,14 +20,18 @@ export default defineComponent({
 
     computed: {
         logs: sync('app/logs', false),
+        server: get('server', false),
+        app: get('app', false),
     },
 
     methods: {
         addEventListener(){
-            window.ipc.on('error', this.showError)
+            window.ipc.on('error', (_, msg) => this.showError(msg))
+            window.ipc.on('log', (_, log) => this.addLogs(log))
         },
 
         showError(message){
+            console.log("Show Error", message)
             this.$q.notify({
                 message,
                 icon: 'warning',
@@ -40,6 +44,17 @@ export default defineComponent({
             this.logs.unshift({ time: Date.now(), message })
         },
 
+        startServer(){
+            window.server.start(JSON.stringify(this.server))
+        },
+
+        restartServer(){
+
+        },
+
+        stopServer(){
+
+        },
 
     }
 })

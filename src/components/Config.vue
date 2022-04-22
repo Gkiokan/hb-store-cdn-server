@@ -27,9 +27,9 @@
     <q-separator class="q-my-md" v-if="true" />
 
     <div class='q-gutter-md'>
-        <q-btn outline color="green-8" label="Start" />
-        <q-btn outline color="orange-8" label="Restart" />
-        <q-btn outline color="red-8" label="Stop" />
+        <q-btn outline color="green-8" label="Start" @click="$root.startServer" />
+        <q-btn outline color="orange-8" label="Restart" @click="$root.restartServer" />
+        <q-btn outline color="red-8" label="Stop" @click="$root.stopServer" />
     </div>
 
     <q-separator class="q-my-md" v-if="true" />

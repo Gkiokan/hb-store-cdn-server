@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
 import express from 'express'
 import http from 'http'
@@ -22,12 +22,12 @@ export default {
     error(err){
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('error', err)
-        this.log(msg)
+        this.log(err)
     },
 
     log(msg){
         const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('error', msg)
+        win.webContents.send('log', msg)
         console.log("Server:: " + msg)
     },
 
@@ -54,8 +54,19 @@ export default {
         this.log("Server is ready to create paths")
     },
 
-    async startServer(config){
+    createServer(){
+        const app = express();
+        this.host.app = app
+        this.host.router = express.Router()
+        this.log("Server created")
+    },
+
+    async start(config){
         this.setConfig(config)
+
+        if(!this.host.app){
+            this.createServer()
+        }
 
         // console.log(this.ip, this.ip.length, this.port, this.port.length)
         if(this.ip.length == 0 || this.port.length == 0){
@@ -65,8 +76,7 @@ export default {
         }
 
         this.host.server = await this.host.app.listen(this.port, () => {
-            this.$store.dispatch('server/addLog', 'Server is running on port ' + this.ip + ' at port ' + this.port)
-            this.$store.dispatch('server/setStatus', 'running')
+            this.log('Server is running on ' + this.ip + ' at port ' + this.port)
             this.addCORSHandler()
             this.addRouterMiddleware()
             this.createPaths()

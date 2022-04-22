@@ -33,7 +33,7 @@ contextBridge.exposeInMainWorld('ipc', {
 
 contextBridge.exposeInMainWorld('server', {
     on: (channel, cb) => ipcRenderer.on(channel, cb),
-    start: (server) => ipcRenderer.invoke('server-start', sever),
+    start: (server) => ipcRenderer.invoke('server-start', server),
     restart: (server) => ipcRenderer.invoke('server-restart', server),
     stop: () => ipcRenderer.invoke('server-stop'),
     scan: (server) => ipcRenderer.invoke('server-scan', server),

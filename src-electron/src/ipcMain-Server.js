@@ -1,20 +1,18 @@
-import { app } from 'electron'
-import express from 'express'
-import http from 'http'
+import { ipcMain } from 'electron'
 import server from './server'
 
-ipcMain.handle('server-start', async(event, server) => {
-    server.start(server)
+ipcMain.handle('server-start', async(event, config) => {
+    server.start(JSON.parse(config))
 })
 
-ipcMain.handle('server-restart', async(event, server) => {
-
-})
-
-ipcMain.handle('server-stop', async(event, server) => {
+ipcMain.handle('server-restart', async(event, config) => {
 
 })
 
-ipcMain.handle('server-scan', async(event, server) => {
+ipcMain.handle('server-stop', async(event, config) => {
+
+})
+
+ipcMain.handle('server-scan', async(event, config) => {
 
 })
