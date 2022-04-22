@@ -13,6 +13,10 @@ export default defineComponent({
         tab: 'config',
     }},
 
+    beforeCreate() {
+      this.$store.commit('initialiseStore');
+    },
+
     created(){
         this.$q.dark.set(true)
         this.addEventListener()
@@ -34,6 +38,13 @@ export default defineComponent({
 
             window.ipc.on('server-state', this.updateServerState)
             window.ipc.on('server-files', this.updateServerFiles)
+
+            this.$store.subscribe(this.storeSubscriber)
+        },
+
+        storeSubscriber(mutation, state){
+            console.log(mutation, state)
+            localStorage.setItem('store', JSON.stringify(state));
         },
 
         updateServerState(_, state){
