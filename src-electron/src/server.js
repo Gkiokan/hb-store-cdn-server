@@ -111,6 +111,16 @@ export default {
         this.sendFiles()
     },
 
+    addFileEndpoint(file){
+        this.host.router.get(`/${file.patchedFilename}`, function(request, response){
+            response.status(200).download(file.path, file.name)
+        })
+
+        file.url = 'http://' + this.ip + ':' + this.port + '/' + file.patchedFilename
+
+        return file
+    },
+
     createServer(){
         const app = express();
         this.host.app = app
