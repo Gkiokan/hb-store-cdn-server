@@ -14,6 +14,7 @@
     "core-js": "^3.6.5",
     "fast-glob": "^3.2.11",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "os": "^0.1.2",
     "path": "^0.12.7",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",

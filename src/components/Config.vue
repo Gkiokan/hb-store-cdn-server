@@ -7,14 +7,16 @@
     <div class='q-gutter-y-md q-mb-md'>
       <div class='row q-col-gutter-md'>
           <div class='col-xs-8'>
-              <q-input v-model="ip" outlined dense stack-label label="Local IP" mask="###.###.###.###" />
+              <q-input v-model="ip" outlined dense stack-label label="Local IP" _mask="###.###.###.###" v-if="false" />
+              <q-select v-model="ip" :options="interfaces" outlined dense stack-label label="Local IP"
+                        option-value="ip" option-label="title" emit-value map-options />
           </div>
           <div class='col-xs-4'>
               <q-input v-model="port" outlined dense stack-label label="Port" max-length="8" />
           </div>
       </div>
 
-      <q-input v-model="basePath" class="q-pr-none" outlined dense stack-label label="Base Folder Path" readonly>
+      <q-input v-model="basePath" class="q-pr-none" outlined dense stack-label label="Base Folder Path">
         <slot name="append">
             <q-btn square flat class="q-pa-sm" color="white" icon="sync" size="sm" />
             <q-btn square flat class="q-pa-sm" color="white" icon="folder" @click="openBasePathDialog" />
@@ -33,26 +35,31 @@
     <pre>{{ ip }}:{{ port }}</pre>
     <pre>{{ basePath }}</pre>
 
+    <pre>{{ interfaces }}</pre>
+
 </div>
 </template>
 
 <script>
 // import { remote } from 'electron'
 // import { app } from '@electron/remote'
-
 import { get, sync } from 'vuex-pathify'
 
 export default {
     name: 'Config',
 
     data(){ return {
-
+        interfaces: [],
     }},
 
     computed: {
         ip: sync('server/ip', false),
         port: sync('server/port', false),
         basePath: sync('server/basePath', false),
+    },
+
+    mounted(){
+        this.loadInterfaces()
     },
 
     methods: {
@@ -69,6 +76,10 @@ export default {
               console.log(newBasePath + ' has been selected as basePath')
             }
 
+        },
+
+        async loadInterfaces(){
+            this.interfaces = await window.hb.getNetWorkInterfaces()
         },
     }
 }

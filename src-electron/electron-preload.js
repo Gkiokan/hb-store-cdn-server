@@ -20,8 +20,6 @@ import { contextBridge, remote } from 'electron'
 import { ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('hb', {
-    openBasePathDialog: () => {
-        return ipcRenderer.invoke('open-dir')
-        // return remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
-    }
+    openBasePathDialog: () => ipcRenderer.invoke('open-dir'),
+    getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
 })
