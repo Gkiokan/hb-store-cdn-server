@@ -230,8 +230,16 @@ module.exports = configure(function (ctx) {
 
       builder: {
         // https://www.electron.build/configuration/configuration
-
-        appId: 'hb-store-cdn-server'
+        appId: 'gkiokan.net.hb-store-cdn-server',
+        directories: {
+          output: "release"
+        },
+        publish: {
+          "provider": "github",
+          "owner": "gkiokan",
+          "repo": "hb-store-cdn-server",
+          "vPrefixedTagName": true
+        }
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
