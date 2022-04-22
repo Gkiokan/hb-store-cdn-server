@@ -32,17 +32,7 @@
 
     <q-separator class="q-my-md" v-if="true" />
 
-    <div class='row'>
-        <div class='col'>
-            <q-btn outline no-caps color="cyan" label="Check Server Binaries" @click="checkServerBinaries" />
-        </div>
-        <div class='' v-if="updateAvailable">
-            <q-btn size="md" class="q-mx-sm" icon="download" @click="downloadServerBinaries" />
-        </div>
-        <div class='self-center text-right'>
-            Current Version {{ binaryVersion }}
-        </div>
-    </div>
+    <ServerBinaryDownload />
 
     <pre>{{ ip }}:{{ port }}</pre>
     <pre>{{ basePath }}</pre>
@@ -55,14 +45,13 @@
 // import { remote } from 'electron'
 // import { app } from '@electron/remote'
 import { get, sync } from 'vuex-pathify'
+import path from 'path'
 
 export default {
     name: 'Config',
 
     data(){ return {
-        interfaces: [],
-        assets: [],
-        updateAvailable: false,
+        interfaces: [],        
     }},
 
     computed: {
@@ -74,6 +63,7 @@ export default {
 
     mounted(){
         this.loadInterfaces()
+
     },
 
     methods: {
@@ -86,40 +76,10 @@ export default {
               this.$store.set('server/basePath', newBasePath)
               console.log(newBasePath + ' has been selected as basePath')
             }
-
         },
 
         async loadInterfaces(){
             this.interfaces = await window.hb.getNetWorkInterfaces()
-        },
-
-
-        async checkServerBinaries(){
-            let release = await this.$hb.getRelease()
-            let version = this.$hb.getVersion(release)
-            let assets  = this.$hb.getAssets(release)
-            let name    = this.$hb.getName(release)
-
-            console.log({ version, assets, name })
-
-            let compare = this.$hb.checkVersion(version)
-
-            if(compare == 1)
-              this.$q.notify("Your current Binary are higher then the release")
-
-            if(compare == 0)
-              this.$q.notify("You are on the current binary version")
-
-            if(compare == -1){
-              this.updateAvailable = true
-              this.assets = assets
-              this.binaryVersion = version
-              this.$q.notify("New Server Binaries are available. Please update")
-            }
-        },
-
-        downloadServerBinaries(){
-            this.assets.map( f => window.hb.downloadServerBinaries(f) )
         },
 
     }

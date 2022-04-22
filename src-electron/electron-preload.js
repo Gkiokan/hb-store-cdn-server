@@ -23,4 +23,9 @@ contextBridge.exposeInMainWorld('hb', {
     openBasePathDialog: () => ipcRenderer.invoke('open-dir'),
     getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
     downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),
+    ipcRenderer: () =>  ipcRenderer,
+})
+
+contextBridge.exposeInMainWorld('ipc', {
+    on: (channel, cb) => ipcRenderer.on(channel, cb),
 })

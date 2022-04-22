@@ -33,14 +33,18 @@ const hb = {
         let urls = []
 
         assets.map( f => {
-            urls.push(f.browser_download_url)
+            urls.push({
+                name: f.name,
+                progress: 0,
+                url: f.browser_download_url
+            })
         })
 
         return urls
     },
 
-    checkVersion(version=null){
-        let currentVersion = store.get('server/binaryVersion')
+    checkVersion(currentVersion="0.00", version="0.00"){
+        console.log("compare ", currentVersion, version)
         return this.compareVersion(currentVersion, version)
     },
 

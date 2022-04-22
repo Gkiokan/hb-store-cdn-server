@@ -14,6 +14,8 @@ ipcMain.handle('download-server-binaries', async(event, file) => {
         await download(win, file, {
             directory: path,
             overwrite: true,
+            onProgress: o => win.webContents.send('download-complete', { file, item: o }),
+            errorMessage: e => alert(e),
         })
     }
     catch (e) { alert(e);  console.error('(download)', e); }
