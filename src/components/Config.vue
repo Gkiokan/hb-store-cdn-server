@@ -26,7 +26,9 @@
 
     <q-separator class="q-my-md" v-if="true" />
 
-    <div class='q-gutter-md'>
+    <div class='q-gutter-md space-around'>
+        <q-btn class="full-width" :color="getServerStateColor" :label="getServerStateLabel" />
+
         <q-btn outline color="green-8" label="Start" @click="$root.startServer" />
         <q-btn outline color="orange-8" label="Restart" @click="$root.restartServer" />
         <q-btn outline color="red-8" label="Stop" @click="$root.stopServer" />
@@ -53,15 +55,41 @@ export default {
     }},
 
     computed: {
+        state: get('server/state', false),
         ip: sync('server/ip', false),
         port: sync('server/port', false),
         basePath: sync('server/basePath', false),
         binaryVersion: sync('server/binaryVersion', false),
+
+        getServerStateLabel(){
+            if(this.state == 'running')
+              return "Server is running"
+
+            if(this.state == 'stopped')
+              return "server is stopped"
+
+            if(this.state == null)
+              return "Start your server!"
+
+            return "Server is hups, unknown?"
+        },
+
+        getServerStateColor(){
+            if(this.state == 'running')
+              return 'green'
+
+            if(this.state == 'stopped')
+              return 'orange'
+
+            if(this.state == null)
+              return 'black'
+
+            return 'pink'
+        },
     },
 
     mounted(){
         this.loadInterfaces()
-
     },
 
     methods: {

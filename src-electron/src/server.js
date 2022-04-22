@@ -19,22 +19,28 @@ export default {
         this.basePath = config.basePath
     },
 
-    error(err){
+    error(err=null){
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('error', err)
         this.log(err)
     },
 
-    log(msg){
+    log(msg=null){
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('log', msg)
         console.log("Server:: " + msg)
     },
 
-    notify(msg){
+    notify(msg=null){
         const win = BrowserWindow.getFocusedWindow();
         win.webContents.send('notify', msg)
         this.log(msg)
+    },
+
+    setState(state=null){
+        const win = BrowserWindow.getFocusedWindow();
+        win.webContents.send('server-state', state)
+        this.log("Set Server State to " + state)
     },
 
     addCORSHandler(){
@@ -83,12 +89,16 @@ export default {
 
         this.host.server = await this.host.app.listen(this.port, () => {
             this.notify('Server is running on ' + this.ip + ' at port ' + this.port)
+            this.setState('running')
+
             this.addCORSHandler()
             this.addRouterMiddleware()
             this.createPaths()
         })
         .on('error', (e) => {
             // console.log({ ...e })
+            this.setState('stopped')
+
             if(e.errno === 'EADDRINUSE'){
               let error = "Port " + this.port + " is already in use. Choose another one and restart the Server"
               this.error(error)

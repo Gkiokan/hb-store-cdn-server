@@ -21,6 +21,7 @@ export default defineComponent({
     computed: {
         logs: sync('app/logs', false),
         server: get('server', false),
+        state: sync('server/state', false),
         app: get('app', false),
     },
 
@@ -29,6 +30,12 @@ export default defineComponent({
             window.ipc.on('error', (_, msg) => this.showError(msg))
             window.ipc.on('log', (_, log) => this.addLogs(log))
             window.ipc.on('notify', (_, msg) => this.notify(msg))
+
+            window.ipc.on('server-state', this.updateServerState)
+        },
+
+        updateServerState(_, state){
+            this.state = state
         },
 
         showError(message){
