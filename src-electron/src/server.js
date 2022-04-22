@@ -109,4 +109,22 @@ export default {
         })
     },
 
+    async stop(){
+        this.log('Closing Server')
+
+        if(this.host.server)
+          await this.host.server.close(() => {
+              this.log('Server closed')
+              this.setState('stopped')
+          })
+        else
+          this.error("Server can not be closed. Server Object does't exist")
+    },
+
+    restart(config){
+        this.log("Server restarting triggered")
+        this.stop()
+        this.start(config)
+    },
+
 }

@@ -62,18 +62,27 @@ export default defineComponent({
         },
 
         startServer(){
-            if(!this.server.ip){
+            if(!this.server.ip)
                 return this.showError("Please select your Local IP first")
-            }
+
+            if(!this.server.port)
+                return this.showError("Please set a port")
+
             window.server.start(JSON.stringify(this.server))
         },
 
         restartServer(){
+            if(!this.server.ip)
+                return this.showError("Please select your Local IP first")
 
+            if(!this.server.port)
+                return this.showError("Please set a port")
+
+            window.server.restart(JSON.stringify(this.server))
         },
 
         stopServer(){
-
+            window.server.stop()
         },
 
     }
