@@ -6,7 +6,7 @@ export default {
     },
 
     createItem(file){
-        
+
         let item = {
           "id": "BBFF12362",
           "name": "Kill'em All.",
@@ -19,9 +19,9 @@ export default {
           "desc_2": "",
           "ReviewStars": "0/5 Rating",
           "Size": "0 bytes",
-          "Author": "RetroGamer",
+          "Author": "HB-Store CDN",
           "apptype": "HB Game",
-          "pv": "4.70-5.05",
+          "pv": "5.05+",
           "main_icon_path": "http://api.staging.pkg-zone.com/attachments/storedata/killemall_icon0.png",
           "main_menu_pic": "/user/app/NPXS39041/storedata/killemall_icon0.png",
           "releaseddate": "2019-04-30"
