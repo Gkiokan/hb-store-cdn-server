@@ -1,6 +1,6 @@
 <template>
 <q-page padding>
-    <q-tab-panels v-model="$root.tab" animated class="bg-transparent"
+    <q-tab-panels v-model="$root.tab" animated class="bg-transparent panel-wrapper"
                   transition-prev="slide-down" transition-next="slide-up">
         <q-tab-panel class="q-pa-none" name="config">
             <Config />
