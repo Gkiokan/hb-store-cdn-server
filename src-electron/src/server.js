@@ -3,6 +3,7 @@ import { app, BrowserWindow } from 'electron'
 import express from 'express'
 import http from 'http'
 import fg from 'fast-glob'
+import path from 'path'
 import hb from './hb'
 import pkgInfo from 'ps4-pkg-info'
 import windows from './../electron-main'
@@ -27,6 +28,10 @@ export default {
         }
 
         return win
+    },
+
+    getBaseURI(){
+        return 'http://' + this.ip + ':' + this.port + '/'
     },
 
     setConfig(config){
@@ -95,6 +100,11 @@ export default {
                 message: "Hearthbeat of HB-Store CDN Server is working"
             })
         })
+
+        this.host.router.get('/icon0.png', function(request, response){
+            let image = path.resolve(__dirname, process.env.QUASAR_PUBLIC_FOLDER) + '/icon0.png'
+            response.status(200).download(image, 'icon0.png')
+        })
     },
 
     async addFilesFromBasePath(){
@@ -106,7 +116,10 @@ export default {
         for (const file of files){
             try {
                 let data = await pkgInfo.extract(file)
+
                 let item = hb.createItem(data, file)
+                    item = hb.addImages(item, this.getBaseURI())
+                    item = this.addFileEndpoint(item)
 
                 this.files.push(item)
                 console.log(item)
@@ -121,14 +134,14 @@ export default {
         this.sendFiles()
     },
 
-    addFileEndpoint(file){
-        this.host.router.get(`/${file.patchedFilename}`, function(request, response){
-            response.status(200).download(file.path, file.name)
+    addFileEndpoint(item){
+        this.host.router.get(`/${item.patchedFilename}`, function(request, response){
+            response.status(200).download(item.path, item.filename)
         })
 
-        file.url = 'http://' + this.ip + ':' + this.port + '/' + file.patchedFilename
+        item.package = this.getBaseURI() + item.patchedFilename
 
-        return file
+        return item
     },
 
     createServer(){
