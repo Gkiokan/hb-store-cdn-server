@@ -117,9 +117,19 @@ export default {
 
         // check the storage checksum
         this.host.router.get('/api.php', function(request, response){
-            let hash  = md5File.sync(db.getStorePath())
+            if('db_check_hash' in request.query){
+                let hash  = md5File.sync(db.getStorePath())
+                response.status(200).json({
+                    hash,
+                    params: request.query,
+                })
+            }
+        })
+
+        // number of downloads?
+        this.host.router.get('/download.php', function(request, response){
             response.status(200).json({
-                hash
+                number_of_downloads: "1337",
             })
         })
 
