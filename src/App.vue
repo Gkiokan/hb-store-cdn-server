@@ -64,8 +64,10 @@ export default defineComponent({
             console.log("Show Error", message)
             this.$q.notify({
                 message,
+                html: true,
                 icon: 'warning',
-                color: 'red'
+                color: 'red',
+                timeout: 2200,
             })
         },
 
@@ -74,7 +76,8 @@ export default defineComponent({
             this.$q.notify({
                 message,
                 icon: 'done',
-                color: 'green'
+                color: 'green',
+                timeout: 800,
             })
         },
 

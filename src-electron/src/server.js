@@ -57,8 +57,7 @@ export default {
     },
 
     setState(state=null){
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('server-state', state)
+        this.getWindow().send('server-state', state)
         this.log("Set Server State to " + state)
     },
 
@@ -162,11 +161,11 @@ export default {
             this.createPaths()
         })
         .on('error', (e) => {
-            // console.log({ ...e })
+            console.log({ ...e })
             this.setState('stopped')
 
-            if(e.errno === 'EADDRINUSE'){
-              let error = "Port " + this.port + " is already in use. Choose another one and restart the Server"
+            if(e.errno === -48){
+              let error = "Port <b>" + this.port + "</b> is already in use. <br>Choose another port and restart the Server"
               this.error(error)
             }
             else {
