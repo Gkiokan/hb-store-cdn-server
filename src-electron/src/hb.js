@@ -5,13 +5,14 @@ import path from 'path'
 export default {
     files: [],
 
-    createItem(data, file){
+    createItem(data, file, pid=1){
         // let patchedFilename = item.name.replace(/[^a-zA-Z0-9-_.]/g, '')
         let patchedFilename = (file.charAt(0) == "/") ? file.substr(1).replace(/[^a-zA-Z0-9-_./]/g, '') : file.replace(/[^a-zA-Z0-9-_./]/g, '')
         let stats = fs.lstatSync(file)
         let size = this.formatBytes(stats.size, 2)
 
         let item = {
+          "pid": pid,
           "id": data.TITLE_ID,
           "name": data.TITLE,
           "desc": "",

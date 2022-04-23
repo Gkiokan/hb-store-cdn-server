@@ -147,6 +147,7 @@ export default {
         this.log("Found " + files.length + " files in basePath")
 
         // loop for files and map the files to a file object
+        let i = 1
         for (const file of files){
             try {
                 let data = await pkgInfo.extract(file)
@@ -155,12 +156,13 @@ export default {
                                             throw e
                                         })
 
-                let item = hb.createItem(data, file)
+                let item = hb.createItem(data, file, i)
                     item = hb.addImages(item, this.getBaseURI())
                     item = this.addFileEndpoint(item)
 
                 this.files.push(item)
                 // console.log(item)
+                i = i+1
             }
             catch(e){ console.log("Error in extracting sfo information", e) }
         }
