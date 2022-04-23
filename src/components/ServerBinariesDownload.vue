@@ -23,7 +23,7 @@
             </q-linear-progress>
         </div>
 
-        <q-btn no-caps size="xs" color="green" class="full-width q-pa-none q-mt-sm" label="Server Binaries updated"
+        <q-btn outlined no-caps icon-right="done" size="xs" color="green" class="full-width q-pa-none q-mt-sm" label="Server Binaries updated"
               style="font-size: 14px; line-height: 1;" :loading="!isComplete" @click="updateAvailable = 0" />
     </div>
 
