@@ -3,7 +3,9 @@ import { app, BrowserWindow } from 'electron'
 import express from 'express'
 import http from 'http'
 import fg from 'fast-glob'
+import hb from './hb'
 import pkgInfo from 'ps4-pkg-info'
+import windows from './../electron-main'
 
 export default {
     ip: null,
@@ -16,6 +18,17 @@ export default {
         router: null,
     },
 
+    getWindow(){
+        let win = BrowserWindow.getFocusedWindow();
+
+        if(!win){
+            let all = BrowserWindow.getAllWindows()
+            win = all[0]
+        }
+
+        return win
+    },
+
     setConfig(config){
         this.ip       = config.ip
         this.port     = config.port
@@ -23,26 +36,24 @@ export default {
     },
 
     error(err=null){
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('error', err)
+        // deprecated
+        // const win = BrowserWindow.getFocusedWindow();
+        this.getWindow().webContents.send('error', err)
         this.log(err)
     },
 
     log(msg=null){
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('log', msg)
+        this.getWindow().webContents.send('log', msg)
         console.log("Server:: " + msg)
     },
 
     notify(msg=null){
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('notify', msg)
+        this.getWindow().webContents.send('notify', msg)
         this.log(msg)
     },
 
     sendFiles(){
-        const win = BrowserWindow.getFocusedWindow();
-        win.webContents.send('server-files', this.files)
+        this.getWindow().webContents.send('server-files', this.files)
     },
 
     setState(state=null){
@@ -87,29 +98,26 @@ export default {
         })
     },
 
-    addFilesFromBasePath(){
+    async addFilesFromBasePath(){
         this.log("Search for pkg files in basePath at " + this.basePath)
         let files = fg.sync([this.basePath + '/**/*.pkg'])
         this.log("Found " + files.length + " files in basePath")
 
-        let patchedFiles = []
-        console.log(files)
+        // loop for files and map the files to a file object
+        for (const file of files){
+            try {
+                let data = await pkgInfo.extract(file)
+                let item = hb.createItem(data, file)
 
-        files.forEach( (file) => {
+                this.files.push(item)
+                console.log(item)
+            }
+            catch(e){ console.log("Error in extracting sfo information", e) }
+        }
 
-              pkgInfo.extract(file)
-                  .then( data => {
-                      console.log("mapping file " + file)
-                      console.log(data)
-                      // patchedFiles.push(data)
-                      this.files.push(data)
-                  })
-                  .catch( e => console.log(e) )
-        })
-
-        console.log("=====================================")
-        console.log("patched file 0 ", this.files[0] )
-        console.log("=====================================")
+        // console.log("=====================================")
+        // console.log("patched file 0 ", this.files[0] )
+        // console.log("=====================================")
 
         this.sendFiles()
     },

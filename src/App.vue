@@ -14,12 +14,13 @@ export default defineComponent({
     }},
 
     beforeCreate() {
-      this.$store.commit('initialiseStore');
+        this.$store.commit('initialiseStore');
     },
 
     created(){
         this.$q.dark.set(true)
         this.addEventListener()
+        this.startUpReset()
     },
 
     computed: {
@@ -31,6 +32,11 @@ export default defineComponent({
     },
 
     methods: {
+        startUpReset(){
+            this.updateServerState(null, null)
+            this.updateServerFiles(null, [])
+        },
+
         addEventListener(){
             window.ipc.on('error', (_, msg) => this.showError(msg))
             window.ipc.on('log', (_, log) => this.addLogs(log))
@@ -43,7 +49,6 @@ export default defineComponent({
         },
 
         storeSubscriber(mutation, state){
-            console.log(mutation, state)
             localStorage.setItem('store', JSON.stringify(state));
         },
 
