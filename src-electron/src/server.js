@@ -7,7 +7,7 @@ import path from 'path'
 import hb from './hb'
 import db from './db'
 import pkgInfo from 'ps4-pkg-info'
-import windows from './../electron-main'
+import md5File from 'md5-file'
 
 export default {
     ip: null,
@@ -103,10 +103,32 @@ export default {
             })
         })
 
+        // sample icon0.png
         this.host.router.get('/icon0.png', function(request, response){
             let image = path.resolve(__dirname, process.env.QUASAR_PUBLIC_FOLDER) + '/icon0.png'
             response.status(200).download(image, 'icon0.png')
         })
+
+        // storage database
+        this.host.router.get('/store.db', function(request, response){
+            let store = db.getStorePath()
+            response.status(200).download(store, 'store.db')
+        })
+
+        // check the storage checksum
+        this.host.router.get('/api.php', function(request, response){
+            let hash  = md5File.sync(db.getStorePath())
+            response.status(200).json({
+                hash
+            })
+        })
+
+        // load server binaries
+        for (const asset of ['homebrew.elf', 'homebrew.elf.sig', 'remote.md5'])
+          this.host.router.get('/update/' + asset, function(request, response){
+              let file = app.getPath('userData') + '/bin/' + asset
+              response.status(200).download(file, asset)
+          })
     },
 
     async addFilesFromBasePath(){
