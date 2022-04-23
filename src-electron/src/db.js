@@ -1,6 +1,9 @@
 import { app, BrowserWindow } from 'electron'
 import fs from 'fs'
 import path from 'path'
+import Database from 'better-sqlite3';
+
+let db;
 
 export default {
 
@@ -47,6 +50,16 @@ export default {
           }
       },
 
+      instance(){
+          const db = new Database(this.getStorePath())
+          this.db = db
+
+          return db
+      },
+
+      addAllItems(item){
+
+      },
 
 
 }

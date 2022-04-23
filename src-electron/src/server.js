@@ -118,6 +118,10 @@ export default {
         for (const file of files){
             try {
                 let data = await pkgInfo.extract(file)
+                                        .catch( e => {
+                                            this.log("Error in PKG Extraction: "+ e + '; File: ' + file)
+                                            throw e
+                                        })
 
                 let item = hb.createItem(data, file)
                     item = hb.addImages(item, this.getBaseURI())
@@ -129,6 +133,7 @@ export default {
             catch(e){ console.log("Error in extracting sfo information", e) }
         }
 
+        db.addAllItems(this.files)
         // console.log("=====================================")
         // console.log("patched file 0 ", this.files[0] )
         // console.log("=====================================")
