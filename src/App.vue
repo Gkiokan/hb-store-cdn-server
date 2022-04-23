@@ -35,6 +35,7 @@ export default defineComponent({
         startUpReset(){
             this.updateServerState(null, null)
             this.updateServerFiles(null, [])
+            this.logs = []
         },
 
         addEventListener(){
