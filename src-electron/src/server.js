@@ -161,15 +161,15 @@ export default {
             this.createPaths()
         })
         .on('error', (e) => {
-            console.log({ ...e })
+            // console.log({ ...e })
             this.setState('stopped')
 
-            if(e.errno === -48){
+            if(e.code === 'EADDRINUSE'){
               let error = "Port <b>" + this.port + "</b> is already in use. <br>Choose another port and restart the Server"
               this.error(error)
             }
             else {
-              this.error('Error in listening on ' + this.ip + ' at port ' + this.port + ". Error: " + e.errno)
+              this.error('Error in listening on ' + this.ip + ' at port ' + this.port + ". Error: " + e.code)
             }
         })
     },
