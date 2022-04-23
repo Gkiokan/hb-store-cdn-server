@@ -2,15 +2,15 @@
 <q-page padding>
     <q-tab-panels v-model="$root.tab" animated class="bg-transparent panel-wrapper"
                   transition-prev="slide-down" transition-next="slide-up">
-        <q-tab-panel xclass="q-pa-none" name="config">
+        <q-tab-panel class="q-pt-sm" name="config">
             <Config />
         </q-tab-panel>
 
-        <q-tab-panel xclass="q-pa-none" name="files">
+        <q-tab-panel class="q-pt-sm" name="files">
             <Files />
         </q-tab-panel>
 
-        <q-tab-panel xclass="q-pa-none" name="logs">
+        <q-tab-panel class="q-pt-sm" name="logs">
             <Logs />
         </q-tab-panel>
     </q-tab-panels>
