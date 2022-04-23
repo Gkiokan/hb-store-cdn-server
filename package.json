@@ -6,7 +6,8 @@
   "author": "Gkiokan <support@gkiokan.net>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

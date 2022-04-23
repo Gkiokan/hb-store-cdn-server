@@ -57,8 +57,17 @@ export default {
           return db
       },
 
-      addAllItems(item){
+      addAllItems(items){
+          const db = this.instance()
 
+          const insert = db.prepare("INSERT INTO homebrews (id,name,desc,image,package,version,picpath,desc_1,desc_2,ReviewStars,Size,Author,apptype,pv,main_icon_path,main_menu_pic,releaseddate) VALUES (@id,@name,@desc,@image,@package,@version,@picpath,@desc_1,@desc_2,@ReviewStars,@Size,@Author,@apptype,@pv,@main_icon_path,@main_menu_pic,@releaseddate)")
+
+          const insertAll = db.transaction( items => {
+              for (const item of items)
+                insert.run(item)
+          })
+
+          insertAll(items)
       },
 
 
