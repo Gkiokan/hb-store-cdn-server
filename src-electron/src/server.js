@@ -5,6 +5,7 @@ import http from 'http'
 import fg from 'fast-glob'
 import path from 'path'
 import hb from './hb'
+import db from './db'
 import pkgInfo from 'ps4-pkg-info'
 import windows from './../electron-main'
 
@@ -84,6 +85,7 @@ export default {
 
     createPaths(){
         this.log("Server is ready to create paths")
+        db.renewDB()
         this.host.router = new express.Router()
         this.addHearthbeatEndpoint()
         this.addFilesFromBasePath()
@@ -122,7 +124,7 @@ export default {
                     item = this.addFileEndpoint(item)
 
                 this.files.push(item)
-                console.log(item)
+                // console.log(item)
             }
             catch(e){ console.log("Error in extracting sfo information", e) }
         }
