@@ -33,17 +33,20 @@ export default {
           path: file,
           filename: path.basename(file),
           patchedFilename,
+          icon0: data.icon0,
         }
 
         return item
     },
 
+    getImagePathURI(data){
+        return data.patchedFilename + '/icon0.png'
+    },
+
     addImages(data=null, base){
         let id    = data.id
-        let image = base + 'icon0.png'
-
-        if(data==null)
-          data = this.item
+        let patched
+        let image = base +  this.getImagePathURI(data)
 
         data.image = image
         data.main_icon_path = image

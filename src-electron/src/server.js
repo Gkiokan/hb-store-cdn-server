@@ -7,6 +7,7 @@ import path from 'path'
 import hb from './hb'
 import db from './db'
 import pkgInfo from 'ps4-pkg-info'
+import { getPs4PkgInfo } from "@njzy/ps4-pkg-info"
 import md5File from 'md5-file'
 
 export default {
@@ -147,18 +148,21 @@ export default {
         this.log("Found " + files.length + " files in basePath")
 
         // loop for files and map the files to a file object
+        let base = this.getBaseURI()
         let i = 1
         for (const file of files){
             try {
-                let data = await pkgInfo.extract(file)
+                // let data = await pkgInfo.extract(file)
+
+                let data = await getPs4PkgInfo(file, { generateBase64Icon: true })
                                         .catch( e => {
                                             this.log("Error in PKG Extraction: "+ e + '; File: ' + file)
                                             throw e
                                         })
 
                 let item = hb.createItem(data, file, i)
-                    item = hb.addImages(item, this.getBaseURI())
-                    item = this.addFileEndpoint(item)
+                    item = hb.addImages(item, base)
+                    item = this.addFileEndpoint(item, base)
 
                 this.files.push(item)
                 // console.log(item)
@@ -175,12 +179,24 @@ export default {
         this.sendFiles()
     },
 
-    addFileEndpoint(item){
+    addFileEndpoint(item, base){
         this.host.router.get(`/${item.patchedFilename}`, function(request, response){
             response.status(200).download(item.path, item.filename)
         })
 
-        item.package = this.getBaseURI() + item.patchedFilename
+        this.host.router.get(`/${item.patchedFilename}/icon0.png`, function(request, response){
+            let imgData = item.icon0.replace(/^data:image\/png;base64,/, '');
+            let img = Buffer.from(imgData, 'base64')
+
+            response.writeHead(200, {
+              'Content-Type': 'image/png',
+              'Content-Length': img.length
+            })
+
+            response.end(img)
+        })
+
+        item.package = base + item.patchedFilename
 
         return item
     },
