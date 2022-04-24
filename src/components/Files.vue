@@ -7,11 +7,14 @@
     <div v-if="files.length == 0">
         List of local serving files will be here ...
     </div>
+    <div v-else>
+        Found {{ files.length }} files 
+    </div>
 
 
-    <div v-for="file in files">
+    <div v-for="item in files">
         <!-- {{ getFileName(file) }} -->
-        <pre>{{ file }}</pre>
+        <pre>{{ item }}</pre>
     </div>
 
 </div>

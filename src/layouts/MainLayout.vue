@@ -13,13 +13,17 @@
         </q-toolbar>
 
         <div class="cdn" :class="{ active : server.state == 'running'}">
-            CDN: {{ getCDNAdress }}
+            Use this as CDN: {{ getCDNAdress }}
         </div>
     </q-header>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer class="bg-black text-grey-5 q-px-md q-py-xs">
+        Made by Gkiokan | <small> Exclusive for HB-Store </small>
+    </q-footer>
 </q-layout>
 </template>
 
@@ -34,9 +38,9 @@ export default defineComponent({
       server: get('server', false),
       getCDNAdress(){
           if(this.server.port != 80)
-            return this.server.ip + ':' + this.server.port
+            return 'http://' + this.server.ip + ':' + this.server.port
 
-          return this.server.ip
+          return 'http://' + this.server.ip
       }
   }
 })

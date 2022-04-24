@@ -151,14 +151,15 @@ export default {
         let base = this.getBaseURI()
         let i = 1
         for (const file of files){
+            console.log("Start file ", file)
             try {
                 // let data = await pkgInfo.extract(file)
                 let data = await getPs4PkgInfo(file, { generateBase64Icon: true })
                                         .catch( e => {
-                                            this.log("Error in PKG Extraction: "+ e + '; File: ' + file)
+                                            this.error("Error in PKG Extraction: "+ e + '; File: ' + file)
                                             throw e
                                         })
-
+                // console.log(data)
                 let item = hb.createItem(data, file, i)
                     item = hb.addImages(item, base)
                     item = this.addFileEndpoint(item, base)
@@ -167,7 +168,12 @@ export default {
                 // console.log(item)
                 i = i+1
             }
-            catch(e){ console.log("Error in extracting sfo information", e) }
+            catch(e){
+                console.log("Error", e)
+            }
+
+            console.log("End file ", file)
+            console.log("====")
         }
 
         db.addAllItems(this.files)
