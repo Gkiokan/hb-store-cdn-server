@@ -46,7 +46,7 @@ function createWindow () {
     }
   })
 
-  // mainWindow.setMenu(null)
+  mainWindow.setMenu(null)
   mainWindow.loadURL(process.env.APP_URL)
 
   if (process.env.DEBUGGING) {
@@ -64,7 +64,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  Menu.setApplicationMenu(null)
+  // Menu.setApplicationMenu(null)
 }
 
 app.whenReady().then(createWindow)
