@@ -47,7 +47,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   data(){ return {
-      version: require(__dirname + '/../../package.json').version,
+      version: process.env.version,
       showCloseButtonNextToTabs: false,
   }},
 
