@@ -1,4 +1,6 @@
-// app global css in SCSS form
+$offsetForTitleBar: -3px;
+
+
 html, body {
     /* Foreground, Background */
     scrollbar-color: #999 #333;
@@ -17,10 +19,24 @@ html, body {
 
 }
 
-
-
 .q-panel-parent.panel-wrapper {
     position: absolute;
     top: 0px; left: 0px; right: 0px; bottom: 0px;
     border: 0px solid red;
+}
+
+.titleBar {
+    cursor: pointer;
+    margin-left: $offsetForTitleBar;
+    margin-right: $offsetForTitleBar;
+    margin-top: $offsetForTitleBar;
+}
+
+.draggable {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
 }

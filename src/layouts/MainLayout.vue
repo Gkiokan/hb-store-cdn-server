@@ -1,15 +1,30 @@
 <template>
 <q-layout view="lHh Lpr lFf">
     <q-header class="q-pa-sm bg-transparent">
+
+        <div class="bg-black q-mb-xs rounded-borders titleBar" v-if="true">
+            <div class='row'>
+                <div class="q-pl-sm self-center text-weight-bold draggable">
+                    HB-Store CDN Server
+                </div>
+                <q-space class="draggable" />
+                <div class='q-pr-sm'>
+                    <q-btn round size="sm" icon="power_settings_new" />
+                </div>
+            </div>
+        </div>
+
         <q-toolbar flat class="bg-dark text-white rounded-borders q-header-top">
-            <q-btn flat label="PKG-Zone" v-if="1" />
+            <q-btn flat label="PKG-Zone" v-if="true" />
             <q-space />
 
             <q-tabs v-model="$root.tab" shrink stretch>
-              <q-tab name="config" label="Config" />
-              <q-tab name="files" label="Files" />
-              <q-tab name="logs" label="Logs" />
+                <q-tab name="config" label="Config" />
+                <q-tab name="files" label="Files" />
+                <q-tab name="logs" label="Logs" />
             </q-tabs>
+
+            <q-btn round class="q-ml-md cursor-pointer" size="sm" icon="power_settings_new" v-if="showCloseButtonNextToTabs" />
         </q-toolbar>
 
         <div class="cdn" :class="{ active : server.state == 'running'}">
@@ -33,6 +48,10 @@ import { get } from 'vuex-pathify'
 
 export default defineComponent({
   name: 'MainLayout',
+
+  data(){ return {
+      showCloseButtonNextToTabs: false,
+  }},
 
   computed: {
       server: get('server', false),
@@ -60,6 +79,7 @@ export default defineComponent({
     align-items: flex-end;
     justify-content: center;
 
+    opacity: 0;
     height: 30px;
     padding-bottom: 3px;
 
@@ -73,6 +93,7 @@ export default defineComponent({
     transition: all .3s;
 
     &.active {
+        opacity: 1;
         bottom: -12px;
     }
 }
