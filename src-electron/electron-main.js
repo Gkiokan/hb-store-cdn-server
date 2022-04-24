@@ -1,4 +1,4 @@
-import { app, BrowserWindow, nativeTheme } from 'electron'
+import { app, BrowserWindow, Menu, nativeTheme } from 'electron'
 import path from 'path'
 import os from 'os'
 import electronDl from 'electron-dl'
@@ -46,6 +46,7 @@ function createWindow () {
     }
   })
 
+  // mainWindow.setMenu(null)
   mainWindow.loadURL(process.env.APP_URL)
 
   if (process.env.DEBUGGING) {
@@ -62,6 +63,8 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  Menu.setApplicationMenu(null)
 }
 
 app.whenReady().then(createWindow)
