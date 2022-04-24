@@ -244,11 +244,11 @@ module.exports = configure(function (ctx) {
           "target": [
             {
               "target": "zip",
-              "arch": [ "x64" ]
+              "arch": [ "x64", "ia32" ]
             },
             {
               "target": "portable",
-              "arch": [ "x64" ]
+              "arch": [ "x64", "ia32" ]
             }
           ]
         },
@@ -259,12 +259,12 @@ module.exports = configure(function (ctx) {
                 "target": "AppImage",
                 "arch": [ "x64" ]
             },
-            // {
-            //     "target": "snap"
-            // },
-            // {
-            //     "target": "deb"
-            // }
+            {
+                "target": "snap"
+            },
+            {
+                "target": "deb"
+            }
           ]
         },
         "portable": {

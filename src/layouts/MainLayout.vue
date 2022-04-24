@@ -27,7 +27,14 @@
     </q-page-container>
 
     <q-footer class="bg-black text-grey-5 q-px-md q-py-xs">
-        Made by Gkiokan | <small> Exclusive for HB-Store </small>
+        <div class='row'>
+          <div class='col'>
+            Made by Gkiokan | <small> Exclusive for HB-Store </small>
+          </div>
+          <div>
+              v{{ version }}
+          </div>
+        </div>
     </q-footer>
 </q-layout>
 </template>
@@ -40,6 +47,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   data(){ return {
+      version: require(__dirname + '/../../package.json').version,
       showCloseButtonNextToTabs: false,
   }},
 
