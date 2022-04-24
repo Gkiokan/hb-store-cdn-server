@@ -36,6 +36,7 @@ function createWindow () {
     height: 600,
     useContentSize: true,
     frame: false,
+    icon: path.join(__dirname, '/icons/icon.png'),
     webPreferences: {
         nodeIntegration: true,
         contextIsolation: true,

@@ -253,6 +253,7 @@ module.exports = configure(function (ctx) {
           ]
         },
         "linux": {
+          "icon": "icons/icon.png",
           "target": [
             {
                 "target": "AppImage",
