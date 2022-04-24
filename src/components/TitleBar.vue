@@ -19,9 +19,22 @@ export default {
     methods: {
         closeApplication(){
             this.$q.dialog({
-                dark: true,
                 title: "Quit application?",
-                message: "This will stop the Server"
+                message: "This will stop the Server and Close the Application",
+                dark: true,
+                cancel: {
+                    flat: true,
+                    color: 'black',
+                    textColor: 'white',
+                },
+                ok: {
+                    flat: true,
+                    label: "Ok, close it",
+                    color: 'transparent',
+                    textColor: 'red',
+                    icon: 'power_settings_new',
+                },
+
             }).onOk( () => {
                 window.hb.closeApplication()
             })

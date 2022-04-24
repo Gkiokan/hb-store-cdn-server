@@ -159,7 +159,7 @@ export default {
                                             this.error("Error in PKG Extraction: "+ e + '; File: ' + file)
                                             throw e
                                         })
-                console.log(data)
+                // console.log(data)
                 let item = hb.createItem(data, file, i)
                     item = hb.addImages(item, base)
                     item = this.addFileEndpoint(item, base)
