@@ -7,7 +7,11 @@
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "quasar build -m electron --target win32",
+    "build:linux": "quasar build -m electron --target linux",
+    "build:mac": "quasar build -m electron --target darwin",
+    "build:all": "quasar build -m electron --target all"
   },
   "dependencies": {
     "@njzy/ps4-pkg-info": "^0.1.0",

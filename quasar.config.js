@@ -234,23 +234,29 @@ module.exports = configure(function (ctx) {
         directories: {
           output: "release"
         },
-        win: {
+        publish: {
+          "provider": "github",
+          "owner": "gkiokan",
+          "repo": "hb-store-cdn-server",
+          "vPrefixedTagName": true
+        },
+        "win": {
           "target": [
             {
               "target": "zip",
-              // "arch": [ "x64", "ia32" ]
+              "arch": [ "x64" ]
             },
             {
               "target": "portable",
-              // "arch": [ "x64", "ia32" ]
+              "arch": [ "x64" ]
             }
           ]
         },
-        linux: {
+        "linux": {
           "target": [
             {
                 "target": "AppImage",
-                // "arch": [ "x64", "ia32", "armv7l" ]
+                "arch": [ "x64" ]
             },
             // {
             //     "target": "snap"
@@ -260,15 +266,9 @@ module.exports = configure(function (ctx) {
             // }
           ]
         },
-        portable: {
+        "portable": {
           "artifactName": "${productName}.exe",
-          "unpackDirName": "HBStoreCDN"
-        },
-        publish: {
-          "provider": "github",
-          "owner": "gkiokan",
-          "repo": "hb-store-cdn-server",
-          "vPrefixedTagName": true
+          "unpackDirName": "HBStoreCDNServer"
         }
       },
 
