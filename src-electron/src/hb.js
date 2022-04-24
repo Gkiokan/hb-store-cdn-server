@@ -1,6 +1,7 @@
 import fs from 'fs'
 import pkgInfo from 'ps4-pkg-info'
 import path from 'path'
+import baseImage from './baseImage'
 
 export default {
     files: [],
@@ -33,7 +34,7 @@ export default {
           path: file,
           filename: path.basename(file),
           patchedFilename,
-          icon0: data.icon0,
+          icon0: data.icon0 ?? baseImage,
         }
 
         return item

@@ -6,7 +6,7 @@
             <Config />
         </q-tab-panel>
 
-        <q-tab-panel class="q-pt-sm" name="files">
+        <q-tab-panel class="q-pt-sm q-px-none" name="files">
             <Files />
         </q-tab-panel>
 
