@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "HB-Store CDN Server",
   "productName": "HB-Store CDN Server",
+  "homepage": "https://gkiokan.net",
   "author": "Gkiokan <support@gkiokan.net>",
   "private": true,
   "scripts": {
