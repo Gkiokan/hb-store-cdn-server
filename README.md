@@ -1,24 +1,31 @@
-# hb-store-cdn-server (hb-store-cdn-server)
+# HB-Store CDN Server
+[![ko-fi](https://img.shields.io/badge/Buy%20me%20a%20Shisha%20on-Ko--fi-red)](https://ko-fi.com/M4M082WK8)
+[![os](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey)](#)
+[![commits_since_release](https://img.shields.io/github/commits-since/gkiokan/hb-store-cdn-server/v1.0.0)](#)
+[![version](https://img.shields.io/github/package-json/v/gkiokan/hb-store-cdn-server)](#)  
+[![downloads](https://img.shields.io/github/downloads/gkiokan/hb-store-cdn-server/total)](#)
+[![last_commit](https://img.shields.io/github/last-commit/gkiokan/hb-store-cdn-server)](#)
 
-Local HB-Store Server
+This is the new HB-Store CDN Tool for you.  
 
-## Install the dependencies
-```bash
-yarn
-# or
-npm install
-```
+## Features  
+Custom Network Interface and Port
+Select base path to scan all pkgs (deep scan)
+Integrated node express server  
+Maps file paths correctly, even with special character and empty spaces  
+List of found files with preview of icon0 and information  
+Dead simple usage  
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
+## How To  
+1.) Selct your IP and choose a Port  
+2.) Add your base path where your pkgs lives  
+3.) Check for Server Binary  
+-- sofar this steps only needen once on configuring, it will autosave the values --  
+4.) Start the Server  -> it will show your CDN Address as below the title bar  
 
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
+## How to configure HB-Store  
+1.) Open HB-Store app on your
+2.) Set the given CDN Address as your CDN
+3.) Save Settings
+4.) Close the HB-Store by pressing options button and open it again  
+5.) You should see the content from your Server now.  
