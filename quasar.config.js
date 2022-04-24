@@ -234,6 +234,36 @@ module.exports = configure(function (ctx) {
         directories: {
           output: "release"
         },
+        win: {
+          "target": [
+            {
+              "target": "zip",
+              // "arch": [ "x64", "ia32" ]
+            },
+            {
+              "target": "portable",
+              // "arch": [ "x64", "ia32" ]
+            }
+          ]
+        },
+        linux: {
+          "target": [
+            {
+                "target": "AppImage",
+                // "arch": [ "x64", "ia32", "armv7l" ]
+            },
+            // {
+            //     "target": "snap"
+            // },
+            // {
+            //     "target": "deb"
+            // }
+          ]
+        },
+        portable: {
+          "artifactName": "${productName}.exe",
+          "unpackDirName": "HBStoreCDN"
+        },
         publish: {
           "provider": "github",
           "owner": "gkiokan",
