@@ -17,8 +17,8 @@ This is the new HB-Store CDN Tool for you.
 - [x] Dead simple usage  
 
 ## ToDo  
-- [] Add Button for "update my settings.ini" (update of HB-Store Settings by one click)  
-- [] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
+- [ ] Add Button for "update my settings.ini" (update of HB-Store Settings by one click)  
+- [ ] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
 
 ## How To  
 1.) Selct your IP and choose a Port  
