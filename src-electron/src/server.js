@@ -153,7 +153,6 @@ export default {
         for (const file of files){
             try {
                 // let data = await pkgInfo.extract(file)
-
                 let data = await getPs4PkgInfo(file, { generateBase64Icon: true })
                                         .catch( e => {
                                             this.log("Error in PKG Extraction: "+ e + '; File: ' + file)
