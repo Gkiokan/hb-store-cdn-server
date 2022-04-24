@@ -31,3 +31,8 @@ ipcMain.handle('getNetWorkInterfaces', async (event) => {
     });
     return ifaces;
 })
+
+
+ipcMain.handle('closeApplication', () => {
+    app.quit()
+})

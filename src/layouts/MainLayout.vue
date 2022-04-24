@@ -2,17 +2,7 @@
 <q-layout view="lHh Lpr lFf">
     <q-header class="q-pa-sm bg-transparent">
 
-        <div class="bg-black q-mb-xs rounded-borders titleBar" v-if="true">
-            <div class='row'>
-                <div class="q-pl-sm self-center text-weight-bold draggable">
-                    HB-Store CDN Server
-                </div>
-                <q-space class="draggable" />
-                <div class='q-pr-sm'>
-                    <q-btn round size="sm" icon="power_settings_new" />
-                </div>
-            </div>
-        </div>
+        <TitleBar />
 
         <q-toolbar flat class="bg-dark text-white rounded-borders q-header-top">
             <q-btn flat label="PKG-Zone" v-if="true" />

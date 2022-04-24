@@ -24,6 +24,7 @@ contextBridge.exposeInMainWorld('hb', {
     getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
     downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),
     ipcRenderer: () =>  ipcRenderer,
+    closeApplication: () => ipcRenderer.invoke('closeApplication'),
 })
 
 contextBridge.exposeInMainWorld('ipc', {
