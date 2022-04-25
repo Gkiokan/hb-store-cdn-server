@@ -66,8 +66,9 @@ export default defineComponent({
         },
 
         updatePS4IP(_, ip=''){
-            console.log("Found a new ps4 ip", ip)
-            this.ps4ip = ip
+            this.addLogs("Request from ps4 ip " + ip)
+            if(!this.ps4ip)
+              this.ps4ip = ip
         },
 
         showError(message){

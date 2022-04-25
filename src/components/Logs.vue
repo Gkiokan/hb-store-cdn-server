@@ -8,7 +8,7 @@
 
     <div class="q-mb-md" v-for="log in logs">
         <b>{{ log.time }} </b> <br>
-        {{ log.message }}
+        <div v-html="log.message" />
     </div>
 
 </div>
