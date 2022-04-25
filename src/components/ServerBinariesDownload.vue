@@ -27,8 +27,6 @@
               style="font-size: 14px; line-height: 1;" :loading="!isComplete" @click="updateAvailable = 0" />
     </div>
 
-    <q-btn label="trigger" @click="test" />
-
 </div>
 </template>
 
@@ -164,10 +162,6 @@ export default {
                 timeout: 500,
             })
         },
-
-        test(){
-            window.ipc.checkServerBinaries()
-        }
 
 
     }
