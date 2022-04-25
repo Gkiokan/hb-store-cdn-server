@@ -9,6 +9,7 @@ import db from './db'
 import pkgInfo from 'ps4-pkg-info'
 import { getPs4PkgInfo } from "@njzy/ps4-pkg-info"
 import md5File from 'md5-file'
+import normalize from 'normalize-path'
 
 export default {
     ip: null,
@@ -144,7 +145,8 @@ export default {
 
     async addFilesFromBasePath(){
         this.log("Search for pkg files in basePath at " + this.basePath)
-        let files = fg.sync([this.basePath + '/**/*.pkg'])
+        let patchedBasePath = normalize(this.basePath)
+        let files = fg.sync([patchedBasePath + '/**/*.pkg'])
         this.log("Found " + files.length + " files in basePath")
 
         // loop for files and map the files to a file object

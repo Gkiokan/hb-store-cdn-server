@@ -1,11 +1,16 @@
 import { BrowserWindow, app, ipcMain, dialog } from 'electron'
 import { download } from 'electron-dl'
+import fs from 'fs'
 
 ipcMain.handle('download-server-binaries', async(event, file) => {
     console.log("Server assets to download", file)
 
     const win = BrowserWindow.getFocusedWindow();
     const path = app.getPath('userData') + '/bin'
+
+    if (!fs.existsSync(path)){
+        fs.mkdirSync(path);
+    }
 
     console.log("Server Binary Folder", path)
     console.log("Download file", file)

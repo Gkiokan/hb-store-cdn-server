@@ -27,6 +27,7 @@
     "http": "0.0.1-security",
     "md5-file": "^5.0.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "normalize-path": "^3.0.0",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "ps4-pkg-info": "^1.0.1",
