@@ -89,9 +89,6 @@ export default defineComponent({
         },
 
         validateBeforeServerStart(){
-            if(this.state == 'running')
-                return this.notify("Server is already running")
-
             if(!this.server.ip)
                 return this.showError("Please select your Local IP first")
 
@@ -111,6 +108,9 @@ export default defineComponent({
 
         startServer(){
             if(this.validateBeforeServerStart() !== false) return
+
+            if(this.state == 'running')
+                return this.notify("Server is already running")
 
             window.server.start(JSON.stringify(this.server))
         },
