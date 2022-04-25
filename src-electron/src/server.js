@@ -88,6 +88,7 @@ export default {
     createPaths(){
         this.log("Server is ready to create paths")
         db.renewDB()
+        this.files = []
         this.host.router = new express.Router()
         this.addHearthbeatEndpoint()
         this.addFilesFromBasePath()
