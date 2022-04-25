@@ -28,7 +28,7 @@
 
     <q-footer class="bg-black text-grey-5 q-px-md q-py-xs">
         <div class='row'>
-          <div class='col'>
+          <div class='col' style="font-size: 13px">
             Made by Gkiokan | <small> Exclusive for HB-Store </small>
           </div>
           <div>

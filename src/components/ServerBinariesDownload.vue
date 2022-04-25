@@ -27,6 +27,8 @@
               style="font-size: 14px; line-height: 1;" :loading="!isComplete" @click="updateAvailable = 0" />
     </div>
 
+    <q-btn label="trigger" @click="test" />
+
 </div>
 </template>
 
@@ -45,6 +47,10 @@ export default {
 
     mounted(){
         this.addEventListener()
+    },
+
+    unmounted(){
+        this.removeEventListener()
     },
 
     computed: {
@@ -67,7 +73,15 @@ export default {
 
     methods: {
         addEventListener(){
+            console.log("Add Event Listener to Server Binaries Download Component")
             window.ipc.on('download-complete', this.downloadProgress)
+            window.ipc.on('check-server-binaries', this.checkServerBinaries)
+        },
+
+        removeEventListener(){
+            console.log("Remove Event Listener to Server Binaries Download Component")
+            window.ipc.removeListener('download-complete', this.downloadProgress)
+            window.ipc.removeListener('check-server-binaries', this.checkServerBinaries)
         },
 
         async checkServerBinaries(){
@@ -150,6 +164,10 @@ export default {
                 timeout: 500,
             })
         },
+
+        test(){
+            window.ipc.checkServerBinaries()
+        }
 
 
     }

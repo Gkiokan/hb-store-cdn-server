@@ -39,6 +39,7 @@ export default defineComponent({
         },
 
         addEventListener(){
+            console.log("Register app events")
             window.ipc.on('error', (_, msg) => this.showError(msg))
             window.ipc.on('log', (_, log) => this.addLogs(log))
             window.ipc.on('notify', (_, msg) => this.notify(msg))
@@ -87,26 +88,35 @@ export default defineComponent({
             this.logs.unshift({ time: Date.now(), message })
         },
 
-        startServer(){
-            if(this.state == 'running'){
+        validateBeforeServerStart(){
+            if(this.state == 'running')
                 return this.notify("Server is already running")
-            }
 
             if(!this.server.ip)
                 return this.showError("Please select your Local IP first")
 
             if(!this.server.port)
                 return this.showError("Please set a port")
+
+            if(!this.server.basePath)
+                return this.showError("Please add a base Path")
+
+            if(this.server.binaryVersion == "0.00"){
+                window.ipc.checkServerBinaries()
+                return this.notify("Server Binaries not up2date. Checking them right now.")
+            }
+
+            return false
+        },
+
+        startServer(){
+            if(this.validateBeforeServerStart() !== false) return
 
             window.server.start(JSON.stringify(this.server))
         },
 
         restartServer(){
-            if(!this.server.ip)
-                return this.showError("Please select your Local IP first")
-
-            if(!this.server.port)
-                return this.showError("Please set a port")
+            if(this.validateBeforeServerStart() !== false) return
 
             window.server.restart(JSON.stringify(this.server))
         },

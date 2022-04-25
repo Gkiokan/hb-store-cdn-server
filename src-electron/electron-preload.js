@@ -22,18 +22,18 @@ import { ipcRenderer } from 'electron'
 contextBridge.exposeInMainWorld('hb', {
     openBasePathDialog: () => ipcRenderer.invoke('open-dir'),
     getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
-    downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),
-    ipcRenderer: () =>  ipcRenderer,
+    downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),    
     closeApplication: () => ipcRenderer.invoke('closeApplication'),
 })
 
 contextBridge.exposeInMainWorld('ipc', {
     on: (channel, cb) => ipcRenderer.on(channel, cb),
+    removeListener: (channel, cb) => ipcRenderer.removeAllListeners(channel),
+    checkServerBinaries: (ch, cb) => ipcRenderer.invoke('trigger-check-server-binaries')
 })
 
 
 contextBridge.exposeInMainWorld('server', {
-    on: (channel, cb) => ipcRenderer.on(channel, cb),
     start: (server) => ipcRenderer.invoke('server-start', server),
     restart: (server) => ipcRenderer.invoke('server-restart', server),
     stop: () => ipcRenderer.invoke('server-stop'),

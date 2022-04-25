@@ -5,7 +5,14 @@ import fs from 'fs'
 ipcMain.handle('download-server-binaries', async(event, file) => {
     console.log("Server assets to download", file)
 
-    const win = BrowserWindow.getFocusedWindow();
+    // const win = BrowserWindow.getFocusedWindow();
+    let win = BrowserWindow.getFocusedWindow();
+
+    if(!win){
+        let all = BrowserWindow.getAllWindows()
+        win = all[0]
+    }
+
     const path = app.getPath('userData') + '/bin'
 
     if (!fs.existsSync(path)){
@@ -26,4 +33,16 @@ ipcMain.handle('download-server-binaries', async(event, file) => {
     catch (e) { alert(e);  console.error('(download)', e); }
 
     // console.log(await download(win, url));
+})
+
+
+ipcMain.handle('trigger-check-server-binaries', () => {
+    let win = BrowserWindow.getFocusedWindow();
+
+    if(!win){
+        let all = BrowserWindow.getAllWindows()
+        win = all[0]
+    }
+
+    win.webContents.send('check-server-binaries')
 })
