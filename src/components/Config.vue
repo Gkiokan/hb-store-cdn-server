@@ -48,6 +48,10 @@
 
     <ServerBinaryDownload />
 
+    <q-separator class="q-my-md" v-if="true" />
+
+    <HBOperations />
+
 </div>
 </template>
 

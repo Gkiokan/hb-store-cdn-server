@@ -7,6 +7,7 @@ import electronDl from 'electron-dl'
 import './src/ipcMain'
 import './src/ipcMain-ServerBinaryDownload'
 import './src/ipcMain-Server'
+import './src/ipcMain-FTP'
 
 // Initialise config
 electronDl({

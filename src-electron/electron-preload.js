@@ -22,7 +22,7 @@ import { ipcRenderer } from 'electron'
 contextBridge.exposeInMainWorld('hb', {
     openBasePathDialog: () => ipcRenderer.invoke('open-dir'),
     getNetWorkInterfaces: () => ipcRenderer.invoke('getNetWorkInterfaces'),
-    downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),    
+    downloadServerBinaries: (f) => ipcRenderer.invoke('download-server-binaries', f),
     closeApplication: () => ipcRenderer.invoke('closeApplication'),
 })
 
@@ -32,10 +32,15 @@ contextBridge.exposeInMainWorld('ipc', {
     checkServerBinaries: (ch, cb) => ipcRenderer.invoke('trigger-check-server-binaries')
 })
 
-
 contextBridge.exposeInMainWorld('server', {
     start: (server) => ipcRenderer.invoke('server-start', server),
     restart: (server) => ipcRenderer.invoke('server-restart', server),
     stop: () => ipcRenderer.invoke('server-stop'),
     scan: (server) => ipcRenderer.invoke('server-scan', server),
+})
+
+contextBridge.exposeInMainWorld('ftp', {
+    getLogs: (server) => ipcRenderer.invoke('get-logs', server),
+    updateSettings: (server) => ipcRenderer.invoke('update-settings', server),
+    restoreSettings: (server) => ipcRenderer.invoke('restore-settings', server),
 })
