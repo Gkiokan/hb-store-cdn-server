@@ -26,6 +26,7 @@ export default defineComponent({
     computed: {
         logs: sync('app/logs', false),
         server: get('server', false),
+        ps4ip: sync('server/ps4ip', false),
         state: sync('server/state', false),
         files: sync('server/files', false),
         app: get('app', false),
@@ -47,6 +48,8 @@ export default defineComponent({
             window.ipc.on('server-state', this.updateServerState)
             window.ipc.on('server-files', this.updateServerFiles)
 
+            window.ipc.on('update-ps4-ip', this.updatePS4IP)
+
             this.$store.subscribe(this.storeSubscriber)
         },
 
@@ -60,6 +63,11 @@ export default defineComponent({
 
         updateServerFiles(_, files){
             this.files = files
+        },
+
+        updatePS4IP(_, ip=''){
+            console.log("Found a new ps4 ip", ip)
+            this.ps4ip = ip
         },
 
         showError(message){

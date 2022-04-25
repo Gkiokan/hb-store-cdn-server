@@ -34,11 +34,16 @@ const Store = createStore({
 
   mutations: {
       initialiseStore(state) {
-        // Check if the ID exists
         if(localStorage.getItem('store')) {
-          // Replace the state object with the stored item
+          let initialState  = JSON.parse(JSON.stringify(state))
+          let restoredStore = JSON.parse(localStorage.getItem('store'))
+          let finalStore = { ...initialState, ...restoredStore }
+
+          // console.log(initialState)
+          // console.log(finalStore)
+
           this.replaceState(
-            Object.assign(state, JSON.parse(localStorage.getItem('store')))
+            Object.assign(state, finalStore)
           );
         }
       }

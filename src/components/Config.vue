@@ -4,26 +4,37 @@
     <div style="height: 15px" />
 
     <div class='q-gutter-y-md q-mb-md'>
-      <div class='row q-col-gutter-md'>
-          <div class='col-xs-8'>
-              <q-input v-model="ip" outlined dense stack-label label="Local IP" _mask="###.###.###.###" v-if="false" />
-              <q-select v-model="ip" :options="interfaces" outlined dense stack-label label="Local IP"
-                        option-value="ip" option-label="title" emit-value map-options />
-          </div>
-          <div class='col-xs-4'>
-              <q-input v-model="port" outlined dense stack-label label="Port" max-length="8" />
-          </div>
-      </div>
+        <div class='row q-col-gutter-md q-mb-md'>
+            <div class='col-xs-8'>
+                <q-input v-model="ip" outlined dense stack-label label="Local IP" _mask="###.###.###.###" v-if="false" />
+                <q-select v-model="ip" :options="interfaces" outlined dense stack-label label="Local IP"
+                          option-value="ip" option-label="title" emit-value map-options />
+            </div>
+            <div class='col-xs-4'>
+                <q-input v-model="port" outlined dense stack-label label="Port" max-length="8" />
+            </div>
+        </div>
 
-      <q-input v-model="basePath" class="q-pr-none" outlined dense stack-label label="Base Folder Path">
-        <slot name="append">
-            <q-btn square flat class="q-pa-sm" color="white" icon="sync" size="sm" />
-            <q-btn square flat class="q-pa-sm" color="white" icon="folder" @click="openBasePathDialog" />
-        </slot>
-      </q-input>
+        <div class='row q-col-gutter-md'>
+            <div class='col-xs-8'>
+                <q-input v-model="ps4ip" outlined dense stack-label label="PS4 IP" mask="###.###.###.###" />
+            </div>
+            <div class='col-xs-4'>
+                <q-input v-model="ps4port" outlined dense stack-label label="PS4 FTP Port" max-length="8" />
+            </div>
+        </div>
+
+        <q-separator class="q-my-md" />
+
+        <q-input v-model="basePath" class="q-pr-none" outlined dense stack-label label="Base Folder Path">
+          <slot name="append">
+              <q-btn square flat class="q-pa-sm" color="white" icon="sync" size="sm" />
+              <q-btn square flat class="q-pa-sm" color="white" icon="folder" @click="openBasePathDialog" />
+          </slot>
+        </q-input>
     </div>
 
-    <q-separator class="q-my-md" v-if="true" />
+    <q-separator class="q-my-md" />
 
     <q-btn class="full-width q-mb-md" :color="getServerStateColor" :label="getServerStateLabel" />
 
@@ -57,6 +68,8 @@ export default {
         state: get('server/state', false),
         ip: sync('server/ip', false),
         port: sync('server/port', false),
+        ps4ip: sync('server/ps4ip', false),
+        ps4port: sync('server/ps4port', false),
         basePath: sync('server/basePath', false),
         binaryVersion: sync('server/binaryVersion', false),
 

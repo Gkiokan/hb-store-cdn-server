@@ -4,6 +4,10 @@ export const state = {
     state: null,
     ip: "",
     port: "6448",
+
+    ps4ip: "",
+    ps4port: "2121",
+
     basePath: null,
     binaryVersion: "0.00",
     files: [],

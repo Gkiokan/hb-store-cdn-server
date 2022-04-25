@@ -69,6 +69,11 @@ export default {
         this.log("Set Server State to " + state)
     },
 
+    updatePS4IP(ip){
+        this.getWindow().send('update-ps4-ip', ip)
+        this.log("I guess we have a ps4 IP here " + ip)
+    },
+
     addCORSHandler(){
         this.host.app.use((req, res, next) => {
             res.setHeader('Access-Control-Allow-Origin', '*')
@@ -113,7 +118,14 @@ export default {
         })
 
         // storage database
-        this.host.router.get('/store.db', function(request, response){
+        this.host.router.get('/store.db', (request, response) => {
+            // console.log("HB-Store Download store.db Request", request)
+            // console.log("PS4 IP", request.ip )
+            var r = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
+            let ip = request.ip
+            let cleanedIP = ip.match(r)[0]
+            this.updatePS4IP(cleanedIP)
+
             let store = db.getStorePath()
             response.status(200).download(store, 'store.db')
         })
@@ -154,7 +166,7 @@ export default {
         let base = this.getBaseURI()
         let i = 1
         for (const file of files){
-            console.log("Start file ", file)
+            // console.log("Start file ", file)
             try {
                 // let data = await pkgInfo.extract(file)
                 let data = await getPs4PkgInfo(file, { generateBase64Icon: true })
@@ -175,8 +187,8 @@ export default {
                 console.log("Error", e)
             }
 
-            console.log("End file ", file)
-            console.log("====")
+            // console.log("End file ", file)
+            // console.log("====")
         }
 
         db.addAllItems(this.files)
