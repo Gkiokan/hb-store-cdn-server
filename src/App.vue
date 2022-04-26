@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { QSpinnerBox } from 'quasar'
 import { defineComponent } from 'vue'
 import { get, sync } from 'vuex-pathify'
 
@@ -44,6 +45,7 @@ export default defineComponent({
             window.ipc.on('error', (_, msg) => this.showError(msg))
             window.ipc.on('log', (_, log) => this.addLogs(log))
             window.ipc.on('notify', (_, msg) => this.notify(msg))
+            window.ipc.on('loading', (_, loading) => this.loading(loading))
 
             window.ipc.on('server-state', this.updateServerState)
             window.ipc.on('server-files', this.updateServerFiles)
@@ -51,6 +53,16 @@ export default defineComponent({
             window.ipc.on('update-ps4-ip', this.updatePS4IP)
 
             this.$store.subscribe(this.storeSubscriber)
+        },
+
+        loading(o){
+            console.log(o)
+
+            if(o.hide)
+              return this.$q.loading.hide()
+
+            o.spinner = QSpinnerBox
+            this.$q.loading.show(o)
         },
 
         storeSubscriber(mutation, state){

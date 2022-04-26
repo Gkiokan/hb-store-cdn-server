@@ -17,7 +17,7 @@
 
         <div class='row q-col-gutter-md'>
             <div class='col-xs-8'>
-                <q-input v-model="ps4ip" outlined dense stack-label label="PS4 IP" mask="###.###.###.###" />
+                <q-input v-model="ps4ip" outlined dense stack-label label="PS4 IP" _mask="###.###.###.###" />
             </div>
             <div class='col-xs-4'>
                 <q-input v-model="ps4port" outlined dense stack-label label="PS4 FTP Port" max-length="8" />
