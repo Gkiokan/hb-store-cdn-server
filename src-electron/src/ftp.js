@@ -1,6 +1,7 @@
 import { app, BrowserWindow, dialog } from 'electron'
 import { download } from 'electron-dl'
 import { Client } from 'basic-ftp'
+import { ConfigIniParser } from 'config-ini-parser'
 import path from 'path'
 import fs from 'fs'
 
@@ -10,6 +11,7 @@ export default {
 
     files: {
         localLog: "",
+        localSettings: "",
         log: "/user/app/NPXS39041/logs/log.txt",
         settings: "/user/app/NPXS39041/settings.ini",
     },
@@ -29,6 +31,7 @@ export default {
         this.ip       = config.ps4ip
         this.port     = config.ps4port
         this.files.localLog = app.getPath('userData') + '/data/' + path.basename(this.files.log)
+        this.files.localSettings = app.getPath('userData') + '/data/' + path.basename(this.files.settings)
     },
 
     error(err=null){
@@ -77,14 +80,18 @@ export default {
         return client
     },
 
+    async download(from, to){
+        let client = await this.getClient()
+        await client.downloadTo(from, to)
+        client.close()
+    },
+
     async getLogs(config){
         this.setConfig(config)
         this.log("Trying to get logs from hb-store ")
         this.loading({ message: "Connecting to the PS4 though FTP" })
 
-        let client = await this.getClient()
-        await client.downloadTo(this.files.localLog, this.files.log)
-        client.close()
+        this.download(this.files.localLog, this.files.log)
 
         this.log("got log.txt, let's save it to the user space")
         this.loading({ message: "Loading log.txt, where should we save it?" })
@@ -104,6 +111,10 @@ export default {
 
         await fs.copyFileSync(this.files.localLog, targetLogFile.filePath)
         this.log("HB-Store log.txt downloaded")
+    },
+
+    async getSettinsg(config){
+
     },
 
     updateSettings(config){

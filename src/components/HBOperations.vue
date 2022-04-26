@@ -1,10 +1,42 @@
 <template lang="html">
 <div class='hb-operations'>
 
-  <div class="q-gutter-md">
-      <q-btn outline no-caps color="grey-6" label="Get Logs" @click="getLogs" />
-      <q-btn outline no-caps color="grey-6" label="Update" @click="updateSettings" />
-      <q-btn outline no-caps color="grey-6" label="Restore" @click="restoreSettings" />
+  <div class="row q-col-gutter-md">
+      <div>
+      <q-btn-dropdown outline no-caps color="grey-6" label="HB-Store Logs">
+          <q-list>
+            <q-item clickable v-close-popup @click="getLogs">
+              <q-item-section>
+                  <q-item-label>Get Logs File from PS4</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item clickable v-close-popup @click="clearLogs">
+              <q-item-section>
+                <q-item-label>Clear Logs on PS4</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+      </q-btn-dropdown>
+      </div>
+
+      <div>
+      <q-btn-dropdown outline no-caps color="grey-6" label="HB-Store Settings">
+          <q-list>
+            <q-item clickable v-close-popup @click="updateSettings">
+              <q-item-section>
+                  <q-item-label>Update CDN to me</q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item clickable v-close-popup @click="restoreSettings">
+              <q-item-section>
+                <q-item-label>Restore CDN to pkg-zone.com</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+      </q-btn-dropdown>
+      </div>
   </div>
 
 </div>
@@ -27,6 +59,10 @@ export default {
     methods: {
         getLogs(){
             window.ftp.getLogs(JSON.stringify(this.server))
+        },
+
+        clearLogs(){
+
         },
 
         updateSettings(){
