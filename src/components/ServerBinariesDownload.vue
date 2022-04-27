@@ -3,18 +3,18 @@
 
     <div class='row'>
         <div class='col'>
-            <q-btn outline no-caps color="cyan" label="Check Server Binaries" @click="checkServerBinaries" />
+            <q-btn outline no-caps color="cyan" label="Check Server Binaries" :loading="isComplete == false && updateAvailable == true" @click="checkServerBinaries" />
         </div>
         <div>
             <q-btn flat size="md" class="q-mx-sm" icon="update" @click="forceRedownload" />
         </div>
         <div class='self-center text-right'>
             <div> Current Version {{ binaryVersion }} </div>
-            <div v-if="updateAvailable"> New Version {{ newUpdateAvailableVersion }} </div>
+            <div v-if="updateAvailable && updateDone == false"> New Version {{ newUpdateAvailableVersion }} </div>
         </div>
     </div>
 
-    <div v-if="updateAvailable">
+    <div v-if="updateAvailable && false">
         <div v-for="asset in assets">
             <q-linear-progress rounded size="20px" :value="asset.progress" color="accent" class="q-mt-sm">
                 <div class="absolute-full flex flex-start items-center text-white q-pl-xs" style="font-size: 15px; line-height: 1;">
@@ -24,7 +24,7 @@
         </div>
 
         <q-btn outlined no-caps icon-right="done" size="xs" color="green" class="full-width q-pa-none q-mt-sm" label="Server Binaries updated"
-              style="font-size: 14px; line-height: 1;" :loading="!isComplete" @click="updateAvailable = 0" />
+              style="font-size: 14px; line-height: 1;" :loading="!isComplete" @click="updateAvailable = false" />
     </div>
 
 </div>
@@ -133,6 +133,7 @@ export default {
         downloadServerBinaries(){
             this.run = true
             this.updateAvailable = true
+            this.updateDone = false
             this.assets.map( f => window.hb.downloadServerBinaries(f.url) )
         },
 
