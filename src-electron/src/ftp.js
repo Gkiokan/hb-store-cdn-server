@@ -34,11 +34,20 @@ export default {
         this.files.localSettings = app.getPath('userData') + '/data/' + path.basename(this.files.settings)
     },
 
+    getCDN(config){
+        return 'http://' + config.ip + ':' + config.port
+    },
+
     error(err=null){
         // deprecated
         // const win = BrowserWindow.getFocusedWindow();
         this.getWindow().webContents.send('error', err)
         this.log(err)
+    },
+
+    notify(msg=null){
+        this.getWindow().webContents.send('notify', msg)
+        this.log(msg)
     },
 
     log(msg=null){
@@ -88,6 +97,13 @@ export default {
         return get
     },
 
+    async upload(source, target){
+        let client = await this.getClient()
+        let get = await client.uploadFrom(source, target)
+        client.close()
+        return get
+    },
+
     async getLogs(config){
         this.setConfig(config)
         this.log("Trying to get logs from HB-Store ")
@@ -119,7 +135,7 @@ export default {
         if(targetLogFile.canceled) return
 
         await fs.copyFileSync(this.files.localLog, targetLogFile.filePath)
-        this.log("HB-Store log.txt downloaded")
+        this.notify("HB-Store log.txt downloaded")
     },
 
     async getSettings(config){
@@ -138,10 +154,44 @@ export default {
         this.loading({ hide: true })
     },
 
-    updateSettings(config){
+    async updateSettings(config){
         this.setConfig(config)
+        this.loading({ message: "Updating Settings.ini "})
 
-        this.log("Update settings.ini of hb-store")
+        let parser = new ConfigIniParser()
+        let cdn    = config.cdn
+
+        // load ini
+        try {
+            let ini    = await fs.readFileSync(this.files.localSettings, 'utf8')
+            parser.parse(ini)
+        }
+        catch(e){
+            this.error("Error in reading settings.ini")
+        }
+
+        // update CDN
+        parser.set('Settings', 'CDN', cdn)
+        try {
+            await fs.writeFileSync(this.files.localSettings, parser.stringify())
+        }
+        catch(e){
+            this.loading({ hide: true })
+            return this.error(e)
+        }
+
+        // upload to ftp
+        this.loading({ message: "Uploading new settings.ini to PS4"})
+        try {
+            await this.upload(this.files.localSettings, this.files.settings)
+        }
+        catch(e){
+            this.loading({ hide: true })
+            return this.error(e)
+        }
+
+        this.loading({ hide: true })
+        this.notify("Update HB-Store CDN to " + cdn)
     },
 
     restoreSettings(config){

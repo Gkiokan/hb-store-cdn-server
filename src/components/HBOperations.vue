@@ -66,11 +66,13 @@ export default {
         },
 
         updateSettings(){
-            window.ftp.updateSettings(JSON.stringify(this.server))
+            let cdn = 'http://' + this.ip + ':' + this.port
+            window.ftp.updateSettings(JSON.stringify({ ...this.server, ...{ cdn } }))
         },
 
         restoreSettings(){
-            window.ftp.restoreSettings(JSON.stringify(this.server))
+            let cdn = 'http://api.pkg-zone.com'
+            window.ftp.updateSettings(JSON.stringify({ ...this.server, ...{ cdn } }))
         },
     }
 }
