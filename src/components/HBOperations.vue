@@ -62,7 +62,7 @@ export default {
         },
 
         clearLogs(){
-
+            window.ftp.cleanLogs(JSON.stringify(this.server))
         },
 
         updateSettings(){

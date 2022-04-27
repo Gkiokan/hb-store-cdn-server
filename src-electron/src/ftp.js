@@ -138,6 +138,30 @@ export default {
         this.notify("HB-Store log.txt downloaded")
     },
 
+    async cleanLogs(config){
+        this.setConfig(config)
+        this.loading({ message: "Cleaning HB-Store Logs"})
+
+        try {
+            await fs.writeFileSync(this.files.localLog, "===== CLEARED LOGS ======\n")
+        }
+        catch(e){
+            this.loading({ hide: true })
+            return this.error(e)
+        }
+
+        try {
+            this.upload(this.files.localLog, this.files.log)
+        }
+        catch(e){
+            this.loading({ hide: true })
+            return this.error(e)
+        }
+
+        this.loading({ hide: true })
+        this.notify("HB-Store has been cleared")
+    },
+
     async getSettings(config){
         this.setConfig(config)
         this.loading({ message: "Loading settings.ini from PS4" })
