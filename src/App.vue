@@ -37,6 +37,7 @@ export default defineComponent({
         startUpReset(){
             this.updateServerState(null, null)
             this.updateServerFiles(null, [])
+            // this.state = 'stopped'
             this.logs = []
         },
 
@@ -66,7 +67,7 @@ export default defineComponent({
         },
 
         storeSubscriber(mutation, state){
-            console.log(mutation)
+            // console.log(mutation)
             localStorage.setItem('store', JSON.stringify(state));
         },
 
@@ -80,8 +81,29 @@ export default defineComponent({
 
         updatePS4IP(_, ip=''){
             this.addLogs("Request from ps4 ip " + ip)
+
             if(!this.ps4ip)
-              this.ps4ip = ip
+              this.$q.dialog({
+                  title: "Found a PS4!",
+                  message: "Your ps4 HB-Store just connected, wanna add it's IP?",
+                  dark: true,
+                  cancel: {
+                      flat: true,
+                      color: 'black',
+                      textColor: 'white',
+                      label: "No, leave my PS4 IP"
+                  },
+                  ok: {
+                      flat: true,
+                      label: "Yea sure, add it!",
+                      color: 'transparent',
+                      textColor: 'green',
+                      icon: 'done',
+                  },
+
+              }).onOk( () => {
+                  this.ps4ip = ip
+              })
         },
 
         showError(message){
