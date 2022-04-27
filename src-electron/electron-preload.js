@@ -41,6 +41,7 @@ contextBridge.exposeInMainWorld('server', {
 
 contextBridge.exposeInMainWorld('ftp', {
     getLogs: (server) => ipcRenderer.invoke('get-logs', server),
+    getSettings: (server) => ipcRenderer.invoke('get-settings', server),
     updateSettings: (server) => ipcRenderer.invoke('update-settings', server),
     restoreSettings: (server) => ipcRenderer.invoke('restore-settings', server),
 })

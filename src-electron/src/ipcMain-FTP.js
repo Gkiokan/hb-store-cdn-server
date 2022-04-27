@@ -5,6 +5,10 @@ ipcMain.handle('get-logs', (event, config) => {
     ftp.getLogs(JSON.parse(config))
 })
 
+ipcMain.handle('get-settings', (event, config) => {
+    ftp.getSettings(JSON.parse(config))
+})
+
 ipcMain.handle('update-settings', (event, config) => {
     ftp.updateSettings(JSON.parse(config))
 })

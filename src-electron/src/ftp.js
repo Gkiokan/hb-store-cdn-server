@@ -56,6 +56,7 @@ export default {
         client.ftp.verbose = true
 
         try {
+            this.log("Connecting to ps4 though ftp " + this.ip + ':' + this.port)
             await client.access({
                 host: this.ip,
                 port: this.port,
@@ -66,12 +67,12 @@ export default {
                 }
             })
 
-            client.trackProgress(info => {
-                console.log("File", info.name)
-                console.log("Type", info.type)
-                console.log("Transferred", info.bytes)
-                console.log("Transferred Overall", info.bytesOverall)
-            })
+            // client.trackProgress(info => {
+            //     console.log("File", info.name)
+            //     console.log("Type", info.type)
+            //     console.log("Transferred", info.bytes)
+            //     console.log("Transferred Overall", info.bytesOverall)
+            // })
         }
         catch(err) {
             this.error(err)
@@ -80,18 +81,26 @@ export default {
         return client
     },
 
-    async download(from, to){
+    async download(target, source){
         let client = await this.getClient()
-        await client.downloadTo(from, to)
+        let get = await client.downloadTo(target, source)
         client.close()
+        return get
     },
 
     async getLogs(config){
         this.setConfig(config)
-        this.log("Trying to get logs from hb-store ")
-        this.loading({ message: "Connecting to the PS4 though FTP" })
+        this.log("Trying to get logs from HB-Store ")
+        this.loading({ message: "Trying to get log.txt from HB-Store" })
 
-        this.download(this.files.localLog, this.files.log)
+        try {
+            await this.download(this.files.localLog, this.files.log)
+        }
+        catch(e){
+            this.loading({ hide: true })
+            this.error(e)
+            return
+        }
 
         this.log("got log.txt, let's save it to the user space")
         this.loading({ message: "Loading log.txt, where should we save it?" })
@@ -113,8 +122,20 @@ export default {
         this.log("HB-Store log.txt downloaded")
     },
 
-    async getSettinsg(config){
+    async getSettings(config){
+        this.setConfig(config)
+        this.loading({ message: "Loading settings.ini from PS4" })
 
+        try {
+            await this.download(this.files.localSettings, this.files.settings)
+        }
+        catch(e){
+            this.loading({ hide: true })
+            this.error(e)
+            return
+        }
+
+        this.loading({ hide: true })
     },
 
     updateSettings(config){
