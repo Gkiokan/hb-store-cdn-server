@@ -55,9 +55,6 @@ export default {
         assets: sync('server/assets', false),
         binaryVersion: sync('server/binaryVersion', false),
         isComplete(){
-            // if(!this.updateAvailable) return false
-            // if(!this.run) return false
-
             let done = this.assets.filter( f => f.progress == 1)
             let isDone = this.assets.length == done.length ? true : false
 
@@ -147,7 +144,10 @@ export default {
         },
 
         updateServerBinariesComplete(){
+            if(this.run == false) return
             if(this.updateDone) return
+
+            console.log("update binary service", this.binaryVersion, this.newUpdateAvailableVersion)
 
             this.run           = false
             this.updateDone    = true

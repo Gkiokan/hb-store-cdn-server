@@ -66,6 +66,7 @@ export default defineComponent({
         },
 
         storeSubscriber(mutation, state){
+            console.log(mutation)
             localStorage.setItem('store', JSON.stringify(state));
         },
 
