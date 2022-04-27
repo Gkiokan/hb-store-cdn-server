@@ -171,8 +171,7 @@ export default {
         }
         catch(e){
             this.loading({ hide: true })
-            this.error(e)
-            return
+            return this.error(e)
         }
 
         this.loading({ hide: true })
@@ -191,7 +190,8 @@ export default {
             parser.parse(ini)
         }
         catch(e){
-            this.error("Error in reading settings.ini")
+            this.loading({ hide: true })
+            return this.error("Error in reading settings.ini")
         }
 
         // update CDN
