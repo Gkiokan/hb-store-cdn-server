@@ -221,8 +221,6 @@ export default {
 
         item.package = base + '/' + item.patchedFilename
 
-        console.log(item.package)
-
         return item
     },
 
