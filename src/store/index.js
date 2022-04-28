@@ -39,8 +39,8 @@ const Store = createStore({
           let restoredStore = JSON.parse(localStorage.getItem('store'))
           let finalStore = { ...initialState, ...restoredStore }
 
-          console.log(initialState)
-          console.log(finalStore)
+          // console.log(initialState)
+          // console.log(finalStore)
 
           this.replaceState(
             Object.assign(state, finalStore)

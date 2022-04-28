@@ -57,8 +57,7 @@ export default defineComponent({
         },
 
         loading(o){
-            console.log(o)
-
+            // console.log(o)
             if(o.hide)
               return this.$q.loading.hide()
 

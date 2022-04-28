@@ -39,7 +39,7 @@
     <q-btn class="full-width q-mb-md" :color="getServerStateColor" :label="getServerStateLabel" />
 
     <div class='q-gutter-md space-around'>
-        <q-btn outline icon="play_arrow" color="green-8" label="Start" @click="$root.startServer" :disable="state != null | state != 'stopped'" />
+        <q-btn outline icon="play_arrow" color="green-8" label="Start" @click="$root.startServer" :disable="!!(state != null | state != 'stopped')" />
         <q-btn outline icon="restart_alt" color="orange-8" label="Restart" @click="$root.restartServer" :disable="state != 'running'" />
         <q-btn outline icon="stop" color="red-8" label="Stop" @click="$root.stopServer" :disable="state != 'running'" />
     </div>
