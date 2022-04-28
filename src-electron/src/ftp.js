@@ -10,9 +10,9 @@ export default {
     port: "",
 
     files: {
-        localLog: "",
-        localSettings: "",
+        loader: "/user/app/NPXS39041/logs/loader.log",
         log: "/user/app/NPXS39041/logs/log.txt",
+        itemzflow: "/user/app/NPXS39041/logs/itemzflow.log",
         settings: "/user/app/NPXS39041/settings.ini",
     },
 
@@ -27,15 +27,13 @@ export default {
         return win
     },
 
+    getLocalFile(file=null){
+        return app.getPath('userData') + '/data/' + path.basename(file)
+    },
+
     setConfig(config){
         this.ip       = config.ps4ip
         this.port     = config.ps4port
-        this.files.localLog = app.getPath('userData') + '/data/' + path.basename(this.files.log)
-        this.files.localSettings = app.getPath('userData') + '/data/' + path.basename(this.files.settings)
-    },
-
-    getCDN(config){
-        return 'http://' + config.ip + ':' + config.port
     },
 
     error(err=null){
@@ -110,7 +108,7 @@ export default {
         this.loading({ message: "Trying to get log.txt from HB-Store" })
 
         try {
-            await this.download(this.files.localLog, this.files.log)
+            await this.download(this.getLocalFile(this.files.log), this.files.log)
         }
         catch(e){
             this.loading({ hide: true })
@@ -134,7 +132,7 @@ export default {
         this.loading({ hide: true })
         if(targetLogFile.canceled) return
 
-        await fs.copyFileSync(this.files.localLog, targetLogFile.filePath)
+        await fs.copyFileSync(this.getLocalFile(this.files.log), targetLogFile.filePath)
         this.notify("HB-Store log.txt downloaded")
     },
 
@@ -143,7 +141,7 @@ export default {
         this.loading({ message: "Cleaning HB-Store Logs"})
 
         try {
-            await fs.writeFileSync(this.files.localLog, "===== CLEARED LOGS ======\n")
+            await fs.writeFileSync(this.getLocalFile(this.files.log), "===== CLEARED LOGS ======\n")
         }
         catch(e){
             this.loading({ hide: true })
@@ -151,7 +149,7 @@ export default {
         }
 
         try {
-            this.upload(this.files.localLog, this.files.log)
+            this.upload(this.getLocalFile(this.files.log), this.files.log)
         }
         catch(e){
             this.loading({ hide: true })
@@ -167,7 +165,7 @@ export default {
         this.loading({ message: "Loading settings.ini from PS4" })
 
         try {
-            await this.download(this.files.localSettings, this.files.settings)
+            await this.download(this.getLocalFile(this.files.settings), this.files.settings)
         }
         catch(e){
             this.loading({ hide: true })
@@ -186,7 +184,7 @@ export default {
 
         // load ini
         try {
-            let ini    = await fs.readFileSync(this.files.localSettings, 'utf8')
+            let ini    = await fs.readFileSync(this.getLocalFile(this.files.settings), 'utf8')
             parser.parse(ini)
         }
         catch(e){
@@ -197,7 +195,7 @@ export default {
         // update CDN
         parser.set('Settings', 'CDN', cdn)
         try {
-            await fs.writeFileSync(this.files.localSettings, parser.stringify())
+            await fs.writeFileSync(this.getLocalFile(this.files.settings), parser.stringify())
         }
         catch(e){
             this.loading({ hide: true })
@@ -207,7 +205,7 @@ export default {
         // upload to ftp
         this.loading({ message: "Uploading new settings.ini to PS4"})
         try {
-            await this.upload(this.files.localSettings, this.files.settings)
+            await this.upload(this.getLocalFile(this.files.settings), this.files.settings)
         }
         catch(e){
             this.loading({ hide: true })
