@@ -40,8 +40,12 @@ export default {
         return item
     },
 
-    removeBasePath(item, toRemove){        
+    removeBasePath(item, toRemove){
         item.patchedFilename = item.patchedFilename.replace(toRemove, '')
+
+        if(item.patchedFilename.charAt(0) == '/')
+          item.patchedFilename = item.patchedFilename.substr(1)
+          
         return item
     },
 
