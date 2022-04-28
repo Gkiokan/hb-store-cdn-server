@@ -10,7 +10,7 @@
         </div>
         <div class='self-center text-right'>
             <div> Current Version {{ binaryVersion }} </div>
-            <div v-if="updateAvailable && updateDone == false"> New Version {{ newUpdateAvailableVersion }} </div>
+            <div v-if="updateAvailable && updateDone == false"><small> New Version {{ newUpdateAvailableVersion }} </small></div>
         </div>
     </div>
 
