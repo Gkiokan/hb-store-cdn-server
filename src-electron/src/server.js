@@ -34,7 +34,7 @@ export default {
     },
 
     getBaseURI(){
-        return 'http://' + this.ip + ':' + this.port + '/'
+        return 'http://' + this.ip + ':' + this.port
     },
 
     setConfig(config){
@@ -159,6 +159,8 @@ export default {
     async addFilesFromBasePath(){
         this.log("Search for pkg files in basePath at " + this.basePath)
         let patchedBasePath = normalize(this.basePath)
+        let toRemoveBasePath = (patchedBasePath.charAt(0) == "/") ? patchedBasePath.substr(1).replace(/[^a-zA-Z0-9-_./]/g, '') : patchedBasePath.replace(/[^a-zA-Z0-9-_./]/g, '')
+
         let files = fg.sync([patchedBasePath + '/**/*.pkg'])
         this.log("Found " + files.length + " files in basePath")
 
@@ -176,6 +178,7 @@ export default {
                                         })
                 // console.log(data)
                 let item = hb.createItem(data, file, i)
+                    item = hb.removeBasePath(item, toRemoveBasePath)
                     item = hb.addImages(item, base)
                     item = this.addFileEndpoint(item, base)
 
@@ -216,7 +219,9 @@ export default {
             response.end(img)
         })
 
-        item.package = base + item.patchedFilename
+        item.package = base + '/' + item.patchedFilename
+
+        console.log(item.package)
 
         return item
     },

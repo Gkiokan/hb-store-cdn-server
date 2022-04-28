@@ -40,6 +40,11 @@ export default {
         return item
     },
 
+    removeBasePath(item, toRemove){        
+        item.patchedFilename = item.patchedFilename.replace(toRemove, '')
+        return item
+    },
+
     getImagePathURI(data){
         return data.patchedFilename + '/icon0.png'
     },
