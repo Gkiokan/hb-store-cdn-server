@@ -24,7 +24,6 @@
                 <div class="text-bold">{{ item.name }} </div>
                 Version: {{ item.version }} <br>
                 Size: {{ item.Size }} <br>
-                {{ item.package }}
             </div>
         </div>
     </div>
