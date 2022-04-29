@@ -15,10 +15,12 @@ This is the new HB-Store CDN Tool for you.
 - [x] Maps file paths correctly, even with special character and empty spaces  
 - [x] List of found files with preview of icon0 and information  
 - [x] Dead simple usage  
+- [x] Add Button for "update my settings.ini" (update of HB-Store Settings by one click)  
+- [x] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
+- [x] Configuration Validation  
 
 ## ToDo  
-- [ ] Add Button for "update my settings.ini" (update of HB-Store Settings by one click)  
-- [ ] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
+- [ ] Tweaks
 
 ## How To  
 1.) Selct your IP and choose a Port  
