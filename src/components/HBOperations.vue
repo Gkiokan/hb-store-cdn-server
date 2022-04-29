@@ -65,12 +65,26 @@ export default {
             window.ftp.cleanLogs(JSON.stringify(this.server))
         },
 
+        validateBefore(){
+            if(!this.ps4ip)
+              return this.$root.showError("Please input your PS4 IP")
+
+            if(!this.ps4port)
+              return this.$root.showError("Please input your PS4 FTP Port")
+
+            return false
+        },
+
         updateSettings(){
+            if(this.validateBefore() !== false) return
+
             let cdn = 'http://' + this.ip + ':' + this.port
             window.ftp.updateSettings(JSON.stringify({ ...this.server, ...{ cdn } }))
         },
 
         restoreSettings(){
+            if(this.validateBefore() !== false) return
+
             let cdn = 'http://api.pkg-zone.com'
             window.ftp.updateSettings(JSON.stringify({ ...this.server, ...{ cdn } }))
         },
