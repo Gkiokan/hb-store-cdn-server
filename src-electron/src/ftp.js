@@ -169,13 +169,21 @@ export default {
         }
         catch(e){
             this.loading({ hide: true })
-            return this.error(e)
+            this.error(e)
+            throw e
         }
 
         this.loading({ hide: true })
     },
 
     async updateSettings(config){
+        try {
+            await this.getSettings(config)
+        }
+        catch(e){ console.log("ERORR IN GET CONFIG"); return }
+
+        console.log("CONTINUE IN UPDATE SETTING")
+
         this.setConfig(config)
         this.loading({ message: "Updating Settings.ini "})
 
@@ -216,10 +224,5 @@ export default {
         this.notify("Update HB-Store CDN to " + cdn)
     },
 
-    restoreSettings(config){
-        this.setConfig(config)
-
-        this.log("Restore settings.ini of hb-store")
-    }
 
 }

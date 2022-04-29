@@ -15,11 +15,6 @@ ipcMain.handle('get-settings', async (event, config) => {
 })
 
 ipcMain.handle('update-settings', async (event, config) => {
-    await ftp.getSettings(JSON.parse(config))
+    // await ftp.getSettings(JSON.parse(config))
     await ftp.updateSettings(JSON.parse(config))
-})
-
-ipcMain.handle('restore-settings', async (event, config) => {
-    await ftp.getSettings(JSON.parse(config))
-    await ftp.restoreSettings(JSON.parse(config))
 })
