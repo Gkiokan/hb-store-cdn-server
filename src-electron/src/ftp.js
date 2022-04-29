@@ -82,7 +82,9 @@ export default {
             // })
         }
         catch(err) {
-            this.error(err)
+            this.error("Cannot connect to PS4")
+            throw err
+            return
         }
 
         return client
@@ -111,8 +113,9 @@ export default {
             await this.download(this.getLocalFile(this.files.log), this.files.log)
         }
         catch(e){
+            console.log("DOWNLOAD ERROR FOR LOG.TXT")
             this.loading({ hide: true })
-            this.error(e)
+            // this.error(e)
             return
         }
 
@@ -149,11 +152,13 @@ export default {
         }
 
         try {
-            this.upload(this.getLocalFile(this.files.log), this.files.log)
+            await this.upload(this.getLocalFile(this.files.log), this.files.log)
         }
         catch(e){
+            console.log("UPLOAD ERROR CATCH")
             this.loading({ hide: true })
-            return this.error(e)
+            // return this.error(e)
+            return
         }
 
         this.loading({ hide: true })
@@ -170,6 +175,7 @@ export default {
         catch(e){
             this.loading({ hide: true })
             this.error(e)
+            console.log("ERROR IN GET SETTINGS.INI")
             throw e
         }
 
@@ -180,7 +186,7 @@ export default {
         try {
             await this.getSettings(config)
         }
-        catch(e){ console.log("ERORR IN GET CONFIG"); return }
+        catch(e){ return }
 
         console.log("CONTINUE IN UPDATE SETTING")
 
