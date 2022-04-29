@@ -28,7 +28,7 @@
 
         <q-input v-model="basePath" class="q-pr-none" outlined dense stack-label label="Base Folder Path">
           <slot name="append">
-              <q-btn square flat class="q-pa-sm" color="white" icon="sync" size="sm" />
+              <q-btn square flat class="q-pa-sm" color="white" icon="sync" size="sm" @click="$root.scanFolder()" :disabled="state != 'running'" />
               <q-btn square flat class="q-pa-sm" color="white" icon="folder" @click="openBasePathDialog" />
           </slot>
         </q-input>

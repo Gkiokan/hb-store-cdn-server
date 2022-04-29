@@ -14,5 +14,5 @@ ipcMain.handle('server-stop', async(event, config) => {
 })
 
 ipcMain.handle('server-scan', async(event, config) => {
-
+    server.rescanFolder(JSON.parse(config))
 })

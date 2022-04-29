@@ -99,6 +99,13 @@ export default {
         this.addFilesFromBasePath()
     },
 
+    async rescanFolder(config){
+        console.log("Trigger re-scan")
+        this.setConfig(config)
+        this.createPaths()
+        this.notify("Re-scaned BasePath")
+    },
+
     addHearthbeatEndpoint(){
         this.log("Create Hearthbeat endpoint")
         this.host.router.get('/hb', function(request, response){

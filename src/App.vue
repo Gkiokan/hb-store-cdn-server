@@ -168,6 +168,10 @@ export default defineComponent({
             window.server.stop()
         },
 
+        scanFolder(){
+            window.server.scan(JSON.stringify(this.server))
+        },
+
     }
 })
 </script>
