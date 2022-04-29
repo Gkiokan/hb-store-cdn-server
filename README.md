@@ -9,15 +9,16 @@
 This is the new HB-Store CDN Tool for you.  
 
 ## Features  
+- [x] Dead simple usage  
 - [x] Custom Network Interface and Port  
 - [x] Select base path to scan all pkgs (deep scan)  
 - [x] Integrated node express server  
 - [x] Maps file paths correctly, even with special character and empty spaces  
 - [x] List of found files with preview of icon0 and information  
-- [x] Dead simple usage  
 - [x] Add Button for "update my settings.ini" (update of HB-Store Settings by one click)  
 - [x] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
 - [x] Configuration Validation  
+- [x] Autoscan BasePath after you change it  
 
 ## ToDo  
 - [ ] Tweaks
