@@ -68,6 +68,13 @@ export default {
         interfaces: [],
     }},
 
+    watch: {
+        basePath(){
+          if(this.state == 'running')
+            this.$root.scanFolder()
+        }
+    },
+
     computed: {
         state: get('server/state', false),
         ip: sync('server/ip', false),
