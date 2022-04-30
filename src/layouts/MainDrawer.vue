@@ -37,7 +37,7 @@
           <q-separator class="q-my-md" />
 
           <div class="q-gutter-sm">
-              <q-btn no-caps color="black" align="left" class="full-width" icon="link" label="Checkout Gkiokan.NET" @click="$root.open('https://pkg-zone.com')" />
+              <q-btn no-caps color="black" align="left" class="full-width" icon="link" label="Checkout Gkiokan.NET" @click="$root.open('https://gkiokan.net')" />
               <q-btn no-caps color="black" align="left" class="full-width" icon="link" label="Checkout PKG-Zone.com" @click="$root.open('https://pkg-zone.com')" />
           </div>
 
