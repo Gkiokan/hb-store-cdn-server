@@ -5,19 +5,19 @@
       <div>
       <q-btn-dropdown outline no-caps color="grey-6" label="HB-Store Logs">
           <q-list>
-            <q-item clickable v-close-popup @click="getLogs">
+            <q-item clickable v-close-popup @click="getLogs('log')">
               <q-item-section>
                   <q-item-label>Get store.log</q-item-label>
               </q-item-section>
             </q-item>
 
-            <q-item clickable v-close-popup @click="getLogs">
+            <q-item clickable v-close-popup @click="getLogs('loader')">
               <q-item-section>
                   <q-item-label>Get loader.log </q-item-label>
               </q-item-section>
             </q-item>
 
-            <q-item clickable v-close-popup @click="getLogs">
+            <q-item clickable v-close-popup @click="getLogs('itemzflow')">
               <q-item-section>
                   <q-item-label>Get itemzflow.log </q-item-label>
               </q-item-section>
@@ -71,8 +71,8 @@ export default {
     },
 
     methods: {
-        getLogs(){
-            window.ftp.getLogs(JSON.stringify(this.server))
+        getLogs(log='log'){
+            window.ftp.getLogs(JSON.stringify(this.server), log)
         },
 
         clearLogs(){

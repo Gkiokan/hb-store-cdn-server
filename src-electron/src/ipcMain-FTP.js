@@ -1,8 +1,8 @@
 import { app, ipcMain } from 'electron'
 import ftp from './ftp'
 
-ipcMain.handle('get-logs', (event, config) => {
-    ftp.getLogs(JSON.parse(config))
+ipcMain.handle('get-logs', (event, config, log) => {
+    ftp.getLogs(JSON.parse(config), log)
 })
 
 ipcMain.handle('clean-logs', (event, config) => {

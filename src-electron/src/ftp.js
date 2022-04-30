@@ -11,7 +11,7 @@ export default {
 
     files: {
         loader: "/user/app/NPXS39041/logs/loader.log",
-        log: "/user/app/NPXS39041/logs/log.txt",
+        log: "/user/app/NPXS39041/logs/store.log",
         itemzflow: "/user/app/NPXS39041/logs/itemzflow.log",
         settings: "/user/app/NPXS39041/settings.ini",
     },
@@ -92,6 +92,14 @@ export default {
 
     async download(target, source){
         let client = await this.getClient()
+        let size   = await client.size(source)
+
+        if(size === 0){
+            console.log(source, size)
+            throw path.basename(source) + " not found or empty"
+            return
+        }
+
         let get = await client.downloadTo(target, source)
         client.close()
         return get
@@ -104,39 +112,47 @@ export default {
         return get
     },
 
-    async getLogs(config){
+    async getLogs(config, log){
         this.setConfig(config)
+
+        let theFile = null;
+        let theFileName = null;
+        if(log in this.files)
+          theFile = this.files[log]
+
+        theFileName = path.basename(theFile)
+
         this.log("Trying to get logs from HB-Store ")
-        this.loading({ message: "Trying to get log.txt from HB-Store" })
+        this.loading({ message: "Trying to get " + theFileName + " from HB-Store" })
 
         try {
-            await this.download(this.getLocalFile(this.files.log), this.files.log)
+            await this.download(this.getLocalFile(theFile), theFile)
         }
         catch(e){
             console.log("DOWNLOAD ERROR FOR LOG.TXT")
             this.loading({ hide: true })
-            // this.error(e)
+            this.error(e)
             return
         }
 
-        this.log("got log.txt, let's save it to the user space")
-        this.loading({ message: "Loading log.txt, where should we save it?" })
+        this.log("got " + theFileName + ", let's save it to the user space")
+        this.loading({ message: "Loading " + theFileName + ", where should we save it?" })
 
         let win = this.getWindow()
         let targetLogFile = await dialog.showSaveDialog(win, {
-            title: "Save HB-Store logs.txt ",
-            defaultPath: "*/log.txt",
+            title: "Save HB-Store " + theFileName,
+            defaultPath: "*/" + theFileName,
             buttonLabel: "Save HB-Store Log",
             filters: [
-                { name: "HB-Store Log.txt", extensions: ['txt'] }
+                { name: "HB-Store " + theFileName, extensions: ['log'] }
             ]
         })
 
         this.loading({ hide: true })
         if(targetLogFile.canceled) return
 
-        await fs.copyFileSync(this.getLocalFile(this.files.log), targetLogFile.filePath)
-        this.notify("HB-Store log.txt downloaded")
+        await fs.copyFileSync(this.getLocalFile(theFile), targetLogFile.filePath)
+        this.notify("HB-Store " + theFileName + "downloaded")
     },
 
     async cleanLogs(config){
