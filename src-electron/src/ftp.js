@@ -159,7 +159,7 @@ export default {
         if(targetLogFile.canceled) return
 
         await fs.copyFileSync(this.getLocalFile(theFile), targetLogFile.filePath)
-        this.notify("HB-Store " + theFileName + "downloaded")
+        this.notify("HB-Store " + theFileName + " downloaded")
     },
 
     async cleanLogs(config){
