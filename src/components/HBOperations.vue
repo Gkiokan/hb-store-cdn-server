@@ -38,14 +38,20 @@
       <q-btn-dropdown outline no-caps color="grey-6" label="HB-Store Settings">
           <q-list>
             <q-item clickable v-close-popup @click="updateSettings">
+              <q-item-section avatar>
+                  <q-img src="hbcdn.png" />
+              </q-item-section>
               <q-item-section>
-                  <q-item-label>Update CDN to me</q-item-label>
+                  <q-item-label>Update CDN to <b>My Server</b></q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable v-close-popup @click="restoreSettings">
+              <q-item-section avatar>
+                  <q-img src="hbglobal.png" />
+              </q-item-section>
               <q-item-section>
-                <q-item-label>Restore CDN to pkg-zone.com</q-item-label>
+                <q-item-label>Restore CDN to <b>pkg-zone.com</b></q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
