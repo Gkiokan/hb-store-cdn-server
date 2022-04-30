@@ -19,6 +19,7 @@ This is the new HB-Store CDN Tool for you.
 - [x] Add Button for "Get HB-Store logs" (retrieve the logs by one click)  
 - [x] Configuration Validation  
 - [x] Autoscan BasePath after you change it  
+- [x] Public Domain Host support
 
 ## ToDo  
 - [ ] More Tweaks
