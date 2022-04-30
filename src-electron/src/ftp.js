@@ -96,8 +96,15 @@ export default {
 
         if(size === 0){
             console.log(source, size)
-            throw path.basename(source) + " not found or empty"
-            return
+
+            // double check for backward compatibility
+            source = source.replace('store.log', 'log.txt')
+            size   = await client.size(source)
+
+            if(size == 0){
+              throw path.basename(source) + " not found or empty"
+              return
+            }
         }
 
         let get = await client.downloadTo(target, source)
