@@ -21,7 +21,8 @@ This is the new HB-Store CDN Tool for you.
 - [x] Autoscan BasePath after you change it  
 
 ## ToDo  
-- [ ] Tweaks
+- [ ] More Tweaks
+- [ ] CLI version
 
 ## How To  
 1.) Selct your IP and choose a Port  
