@@ -7,9 +7,23 @@
           <q-list>
             <q-item clickable v-close-popup @click="getLogs">
               <q-item-section>
-                  <q-item-label>Get Logs File from PS4</q-item-label>
+                  <q-item-label>Get store.log</q-item-label>
               </q-item-section>
             </q-item>
+
+            <q-item clickable v-close-popup @click="getLogs">
+              <q-item-section>
+                  <q-item-label>Get loader.log </q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-item clickable v-close-popup @click="getLogs">
+              <q-item-section>
+                  <q-item-label>Get itemzflow.log </q-item-label>
+              </q-item-section>
+            </q-item>
+
+            <q-separator inset />
 
             <q-item clickable v-close-popup @click="clearLogs">
               <q-item-section>

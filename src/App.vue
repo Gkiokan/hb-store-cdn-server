@@ -133,7 +133,7 @@ export default defineComponent({
 
         validateBeforeServerStart(){
             if(!this.server.ip)
-                return this.showError("Please select your Local IP first")
+                return this.showError("Please select your Host IP first")
 
             if(!this.server.port)
                 return this.showError("Please set a port")
@@ -160,6 +160,8 @@ export default defineComponent({
 
         restartServer(){
             if(this.validateBeforeServerStart() !== false) return
+            if(this.state == 'stopped' || this.state == null)
+              return this.startServer()
 
             window.server.restart(JSON.stringify(this.server))
         },
