@@ -1,4 +1,4 @@
-import { BrowserWindow, app, ipcMain, dialog } from 'electron'
+import { BrowserWindow, app, ipcMain, dialog, shell } from 'electron'
 import { download } from 'electron-dl'
 
 ipcMain.handle('open-dir', async (event, path) => {
@@ -32,6 +32,9 @@ ipcMain.handle('getNetWorkInterfaces', async (event) => {
     return ifaces;
 })
 
+ipcMain.handle('open-url', (e, url) => {
+    shell.openExternal(url)
+})
 
 ipcMain.handle('closeApplication', () => {
     app.quit()

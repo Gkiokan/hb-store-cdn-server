@@ -16,7 +16,7 @@
  *   })
  */
 
-import { contextBridge, remote } from 'electron'
+import { contextBridge } from 'electron'
 import { ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('hb', {
@@ -28,6 +28,7 @@ contextBridge.exposeInMainWorld('hb', {
 
 contextBridge.exposeInMainWorld('ipc', {
     on: (channel, cb) => ipcRenderer.on(channel, cb),
+    open: (url) => ipcRenderer.invoke('open-url', url),
     removeListener: (channel, cb) => ipcRenderer.removeAllListeners(channel),
     checkServerBinaries: (ch, cb) => ipcRenderer.invoke('trigger-check-server-binaries')
 })

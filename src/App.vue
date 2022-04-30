@@ -174,6 +174,10 @@ export default defineComponent({
             window.server.scan(JSON.stringify(this.server))
         },
 
+        open(url){
+            window.ipc.open(url)
+        }
+
     }
 })
 </script>
