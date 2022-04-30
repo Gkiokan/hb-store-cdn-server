@@ -8,6 +8,7 @@
           <div class="q-mb-sm q-gutter-sm text-center">
               <q-btn round flat size="sm" icon="fab fa-github" @click="$root.open('https://github.com/Gkiokan/hb-store-cdn-server')" />
               <q-btn round flat size="sm" icon="fab fa-twitter" @click="$root.open('https://twitter.com/GkiokanSali')" />
+              <q-btn round flat size="sm" icon="fab fa-instagram" @click="$root.open('https://www.instagram.com/gkiokan.sali/')" />
               <q-btn round flat size="sm" icon="link" @click="$root.open('https://pkg-zone.com')" />
           </div>
 

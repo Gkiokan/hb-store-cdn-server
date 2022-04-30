@@ -185,7 +185,7 @@ export default {
         }
 
         this.loading({ hide: true })
-        this.notify("HB-Store has been cleared")
+        this.notify("HB-Store log has been cleared")
     },
 
     async getSettings(config){

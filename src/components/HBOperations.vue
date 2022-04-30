@@ -7,19 +7,19 @@
           <q-list>
             <q-item clickable v-close-popup @click="getLogs('log')">
               <q-item-section>
-                  <q-item-label>Get store.log</q-item-label>
+                  <q-item-label> <q-icon class="q-mr-sm" name="far fa-file-alt" /> Get store.log</q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable v-close-popup @click="getLogs('loader')">
               <q-item-section>
-                  <q-item-label>Get loader.log </q-item-label>
+                  <q-item-label> <q-icon class="q-mr-sm" name="far fa-file-alt" /> Get loader.log </q-item-label>
               </q-item-section>
             </q-item>
 
             <q-item clickable v-close-popup @click="getLogs('itemzflow')">
               <q-item-section>
-                  <q-item-label>Get itemzflow.log </q-item-label>
+                  <q-item-label> <q-icon class="q-mr-sm" name="far fa-file-alt" /> Get itemzflow.log </q-item-label>
               </q-item-section>
             </q-item>
 
@@ -27,7 +27,7 @@
 
             <q-item clickable v-close-popup @click="clearLogs">
               <q-item-section>
-                <q-item-label>Clear Logs on PS4</q-item-label>
+                <q-item-label> <q-icon class="q-mr-sm" name="fas fa-eraser" /> Clear Logs on PS4</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
