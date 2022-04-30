@@ -2,8 +2,8 @@
   <q-drawer v-model="$root.drawerLeft" :width="300" elevated>
       <div class="absolute-full q-pa-md q-pl-lg column justify-between ">
 
-          <q-img class="q-mb-md" src="/logo.png" />
-          <q-img class="q-mx-auto q-mb-sm cursor-pointer" src="/kofi.svg" width="180px" @click="$root.open('https://ko-fi.com/gkiokan')" />
+          <q-img class="q-mb-md" :src="$root.getImage('logo.png')" />
+          <q-img class="q-mx-auto q-mb-sm cursor-pointer" :src="$root.getImage('kofi.svg')" width="180px" @click="$root.open('https://ko-fi.com/gkiokan')" />
 
           <div class="q-mb-sm q-gutter-sm text-center">
               <q-btn round flat size="sm" icon="fab fa-github" @click="$root.open('https://github.com/Gkiokan/hb-store-cdn-server')" />

@@ -6,6 +6,7 @@
 import { QSpinnerBox } from 'quasar'
 import { defineComponent } from 'vue'
 import { get, sync } from 'vuex-pathify'
+import url from 'url'
 
 export default defineComponent({
     name: 'App',
@@ -178,7 +179,19 @@ export default defineComponent({
 
         open(url){
             window.ipc.open(url)
-        }
+        },
+
+        getImage(img){
+            return img
+            const isDevelopment = process.env.NODE_ENV === 'development';
+            // const staticPath = isDevelopment ? __static : __dirname.replace(/app\.asar$/, 'static');
+
+            if(isDevelopment)
+              return url.resolve(window.location.origin, img);
+
+            return __dirname.replace(/app\.asar$/, 'static') + '/' + img
+        },
+
 
     }
 })
