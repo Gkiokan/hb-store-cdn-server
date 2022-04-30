@@ -5,7 +5,7 @@
         <TitleBar />
 
         <q-toolbar flat class="bg-dark text-white rounded-borders q-header-top">
-            <q-btn flat icon="menu" _label="PKG-Zone" @click="drawerLeft = !drawerLeft" />
+            <q-btn flat icon="menu" _label="PKG-Zone" @click="$root.drawerLeft = !$root.drawerLeft" />
             <q-space />
 
             <q-tabs v-model="$root.tab" shrink stretch>
@@ -22,35 +22,7 @@
         </div>
     </q-header>
 
-    <q-drawer v-model="drawerLeft" :width="300" elevated>
-        <div class="absolute-full q-pa-md q-pl-lg column justify-between ">
-            <div> Item </div>
-            <q-space />
-
-            <q-separator class="q-my-md" />
-
-            <div class="q-gutter-md">
-                <div>
-                    <div class="text-bold">HB-Store (ps4 app)</div>
-                    Created by LightningMods
-                </div>
-                <div>
-                    <div class="text-bold">PKG-Zone</div>
-                    Official HB-Store <br>
-                    owned by LightningMods
-                </div>
-            </div>
-
-            <q-separator class="q-my-md" />
-
-            <div class="q-gutter-sm">
-                <q-btn no-caps color="black" align="left" class="full-width" icon="link" label="Checkout PKG-Zone.com" @click="$root.open('https://pkg-zone.com')" />
-                <q-btn no-caps color="black" align="left" class="full-width" icon="support_agent" label="Get Help on PKG-Zone" @click="$root.open('https://discord.gg/YbQFRvRYDa')" />
-                <q-btn no-caps color="black" align="left" class="full-width" icon="fab fa-discord" label="Join PKG-Zone Discord" @click="$root.open('https://discord.gg/CRv9gCwudS')" />
-            </div>
-        </div>
-    </q-drawer>
-
+    <MainDrawer />
 
     <q-page-container>
       <router-view />
@@ -62,7 +34,7 @@
             Made by Gkiokan | <small> Exclusive for HB-Store </small>
           </div>
           <div>
-              v{{ version }}
+              v{{ $root.version }}
           </div>
         </div>
     </q-footer>
@@ -73,12 +45,16 @@
 import { defineComponent, ref } from 'vue'
 import { get } from 'vuex-pathify'
 
+import MainDrawer from './MainDrawer'
+
 export default defineComponent({
   name: 'MainLayout',
 
+  components: {
+      MainDrawer
+  },
+
   data(){ return {
-      drawerLeft: false,
-      version: process.env.version,
       showCloseButtonNextToTabs: false,
   }},
 
