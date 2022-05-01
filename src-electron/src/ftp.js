@@ -93,6 +93,11 @@ export default {
     async download(target, source){
         let client = await this.getClient()
         let size   = await client.size(source)
+        let dir    = path.dirname(target)
+
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
 
         if(size === 0){
             console.log(source, size)

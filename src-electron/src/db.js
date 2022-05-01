@@ -40,6 +40,11 @@ export default {
       renewDB(){
           let clean = this.getCleanStorePath()
           let store = this.getStorePath()
+          let dir   = path.dirname(store)
+
+          if (!fs.existsSync(dir)) {
+              fs.mkdirSync(dir);
+          }
 
           try {
               fs.copyFileSync(clean, store)

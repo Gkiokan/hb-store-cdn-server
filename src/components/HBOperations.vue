@@ -27,7 +27,7 @@
 
             <q-item clickable v-close-popup @click="clearLogs">
               <q-item-section>
-                <q-item-label> <q-icon class="q-mr-sm" name="fas fa-eraser" /> Clear Logs on PS4</q-item-label>
+                <q-item-label> <q-icon class="q-mr-sm" name="fas fa-eraser" /> Clear store.log on PS4</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
