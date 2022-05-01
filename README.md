@@ -8,7 +8,7 @@
 
 This is the new HB-Store CDN Tool for you.  
 
-![HB-Store CDN Server](https://pbs.twimg.com/media/FRoTbg7XsAI09g8?format=jpg&name=large)  
+![HB-Store CDN Server](https://pbs.twimg.com/media/FRrNHV2XoAAzCNP?format=jpg&name=large)  
 
 
 ## Features  
