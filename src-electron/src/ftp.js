@@ -103,6 +103,7 @@ export default {
 
             if(size == 0){
               throw path.basename(source) + " not found or empty"
+              client.close()
               return
             }
         }
