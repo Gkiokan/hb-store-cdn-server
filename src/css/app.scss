@@ -40,3 +40,7 @@ html, body {
 .cursor-pointer {
     cursor: pointer !important;
 }
+
+.q-field--outlined.q-field--readonly .q-field__control:before {
+    border-style: solid !important;
+}

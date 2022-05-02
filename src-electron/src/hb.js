@@ -45,7 +45,7 @@ export default {
 
         if(item.patchedFilename.charAt(0) == '/')
           item.patchedFilename = item.patchedFilename.substr(1)
-          
+
         return item
     },
 
@@ -56,7 +56,7 @@ export default {
     addImages(data=null, base){
         let id    = data.id
         let patched
-        let image = base +  this.getImagePathURI(data)
+        let image = base + '/' + this.getImagePathURI(data)
 
         data.image = image
         data.main_icon_path = image
