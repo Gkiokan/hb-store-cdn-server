@@ -26,7 +26,7 @@ This is the new HB-Store CDN Tool for you.
 
 ## ToDo  
 - [ ] More Tweaks
-- [ ] CLI version
+- [x] CLI version [HB-Store CDN Server CLI-Version available here](https://github.com/Gkiokan/hb-store-cdn-cli-server)
 
 ## How To  
 1.) Selct your IP and choose a Port  
