@@ -127,11 +127,12 @@ export default {
             this.downloadServerBinaries()
         },
 
-        downloadServerBinaries(){
+        async downloadServerBinaries(){
             this.run = true
             this.updateAvailable = true
             this.updateDone = false
-            this.assets.map( f => window.hb.downloadServerBinaries(f.url) )
+
+            await Promise.all( this.assets.map( f => window.hb.downloadServerBinaries(f.url) ) )
         },
 
         downloadProgress(event, o){

@@ -156,11 +156,17 @@ export default {
         })
 
         // load server binaries
-        for (const asset of ['homebrew.elf', 'homebrew.elf.sig', 'remote.md5'])
-          this.host.router.get('/update/' + asset, function(request, response){
-              let file = app.getPath('userData') + '/bin/' + asset
-              response.status(200).download(file, asset)
-          })
+        for (const asset of [
+            'homebrew.elf',
+            'homebrew.elf.sig',
+            'remote.md5',
+            'store.prx',
+            'store.prx.sig',
+        ])
+            this.host.router.get('/update/' + asset, function(request, response){
+                let file = app.getPath('userData') + '/bin/' + asset
+                response.status(200).download(file, asset)
+            })
     },
 
     async addFilesFromBasePath(){
