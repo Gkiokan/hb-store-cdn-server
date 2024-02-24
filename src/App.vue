@@ -18,7 +18,7 @@ export default defineComponent({
     }},
 
     beforeCreate() {
-        this.$store.commit('initialiseStore');
+        this.$store.commit('initialiseStore');        
     },
 
     created(){

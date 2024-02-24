@@ -8,7 +8,9 @@ const hb = {
         files: [
             'homebrew.elf',
             'homebrew.elf.sig',
-            'remote.md5'
+            'remote.md5',
+            'store.prx',
+            'store.prx.sig',
         ],
     },
 
