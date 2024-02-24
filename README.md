@@ -23,6 +23,7 @@ This is the new HB-Store CDN Tool for you.
 - [x] Configuration Validation  
 - [x] Autoscan BasePath after you change it  
 - [x] Public Domain Host support
+- [x] Add PS5 Support
 
 ## ToDo  
 - [ ] More Tweaks

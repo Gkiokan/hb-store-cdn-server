@@ -46,7 +46,7 @@
   "devDependencies": {
     "@quasar/app-webpack": "^3.0.0",
     "electron": "^18.0.1",
-    "electron-builder": "^22.14.13"
+    "electron-builder": "^23.0.3"
   },
   "browserslist": [
     "last 10 Chrome versions",
