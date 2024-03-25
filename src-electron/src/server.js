@@ -126,14 +126,22 @@ export default {
 
         // storage database
         this.host.router.get('/store.db', (request, response) => {
-            // console.log("HB-Store Download store.db Request", request)
-            // console.log("PS4 IP", request.ip )
-            var r = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
-            let ip = request.ip
-            let cleanedIP = ip.match(r)[0]
-            this.updatePS4IP(cleanedIP)
+            console.log("HB-Store Download store.db Request", request)
+            console.log("PS4 IP", request.ip )
+
+            // for local tests this throws
+            try {
+                var r = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
+                let ip = request.ip
+                let cleanedIP = ip.match(r)[0]
+                this.updatePS4IP(cleanedIP)
+            }
+            catch( e ){
+
+            }
 
             let store = db.getStorePath()
+            console.log(store)            
             response.status(200).download(store, 'store.db')
         })
 
